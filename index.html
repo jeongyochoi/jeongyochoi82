@@ -360,6 +360,12 @@ img.mms{display:block;height:auto;width:160px;cursor:pointer}
 .msi::placeholder{color:#ffffffc4}
 .msb .msx{width:28px;height:28px}.msb .msx svg{width:18px;height:18px}
 .msn{padding:30px 0 22px;text-align:center;color:#7a7d84;font-size:13px}
+.sqb{flex:1;min-width:0;display:flex;align-items:center;gap:8px;height:38px;padding:0 6px 0 12px;border-radius:19px;background:#0000000d;color:#17191c;margin-left:2px}
+.sqb>svg{flex:none;width:19px;height:19px;color:#6b6f76}
+.sqi{flex:1;min-width:0;background:none;border:0;outline:0;color:inherit;font:inherit;font-size:14.5px;padding:0;text-align:left}
+.sqi::placeholder{color:#8a8f98}
+.sqb .sqx{width:28px;height:28px;color:#6b6f76}.sqb .sqx svg{width:18px;height:18px}
+.sqc{display:block;width:100%;border:0;font-family:inherit;font-size:14px;line-height:inherit;color:inherit}
 /* 메모 */
 .xa.me{background:#fffdf3}
 .xmcd{display:block;width:100%;text-align:left;background:#fff;border-radius:16px;padding:14px;margin-bottom:10px;box-shadow:0 1px 4px #0001}
@@ -740,7 +746,7 @@ const mkey=w=>{const m=/(\d+)\D+(\d+)\D+(\d+)/.exec(w||'');return m?m[1]*1e4+m[2
 const dkey=d=>d[0]*1e4+d[1]*100+d[2];
 D.w.feed.sort((a,b)=>dkey(b.date)-dkey(a.date));
 const parseMemos=a=>a.map(m=>{const[h,...r]=m.x.split('\n');if(m.p)return{title:h,d:m.w,p:1,txt:m.x,items:[]};return{title:h,d:m.w,items:r.filter(l=>l.trim()).map(l=>({c:/^\[x\]\s*/i.test(l)?1:0,t:l.replace(/^\[x\]\s*/i,'').replace(/^-\s*/,'')}))}}).sort((x,y)=>mkey(y.d)-mkey(x.d));
-const CA0=()=>{const d=D.cal0||D.now;return {y:d[0],m:d[1]-1,sel:[d[0],d[1]-1,d[2]],pick:0}};
+const CA0=()=>{const d=D.cal0||D.now;return {y:d[0],m:d[1]-1,sel:[d[0],d[1]-1,d[2]],pick:0,s:0,q:''}};
 const S={ph:{tab:'recent',dial:'',calls:clone(D.c)},tk:{v:'list',i:0,rooms:clone(D.k)},ca:CA0(),ck:{tab:'alarm',al:D.ck.al.map(a=>({t:a[0],l:a[1],on:true}))},ga:{p:null,y:0},me:{i:null,memos:parseMemos(D.n),focus:null},we:{v:'home',i:0,y:0},mu:{tr:D.mu.start,play:true,prog:38},rc:{on:0,pause:0,t0:0,acc:0,w:[],cnt:0,p:null,list:D.rec.map(r=>({n:r[0],d:r[1],l:r[2],k:r[3]}))}};
 const unread=()=>S.tk.rooms.reduce((a,r)=>a+(r[2]||0),0);
 const BK={},V={},A={},PH={},LT={},CLS={};
@@ -826,7 +832,7 @@ function resetApp(id){
  else if(id=='talk'){S.tk.v='list';S.tk.pf=0;S.tk.pv=null;S.tk.sy=null}
  else if(id=='cal'){S.ca=CA0()}
  else if(id=='gal'){S.ga={p:null,y:0}}
- else if(id=='memo')S.me.i=null;
+ else if(id=='memo'){S.me.i=null;S.me.s=0;S.me.q=''}
  else if(id=='web'){S.we.v='home';S.we.y=0}
  else if(id=='clock')S.ck.tab='alarm';
  else if(id=='rec'){S.rc.p=null;if(RA)RA.pause()}
@@ -1042,15 +1048,27 @@ BK.gal=()=>{const g=S.ga;if(g.p!=null){g.p=null;return true}return false};
 A.gpic=d=>{const c=$('gal').querySelector('.xc');S.ga.y=c?c.scrollTop:0;S.ga.p=+d.j};
 A.gnav=d=>{const n=S.ga.p+ +d.d;if(n>=0&&n<GL().length)S.ga.p=n};
 A.gvp=()=>{const v=document.querySelector('#gal video');if(!v)return false;if(v.paused){const p=v.play();if(p&&p.catch)p.catch(()=>toast('재생할 수 없습니다'))}else v.pause();return false};
+/* ===== 메모·캘린더 검색 (음악 앱 검색과 같은 방식: 돋보기 → 검색창 · X로 지우기 · 뒤로가기로 닫기 · 앱을 다시 열면 초기화) ===== */
+const sqBar=(a,ph,q)=>`<label class="sqb">${IC.search}<input class="sqi" data-sq="${a}" type="text" value="${esc(q||'')}" placeholder="${ph}" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="${ph}"><button class="sqx" data-a="${a}cl" aria-label="검색어 지우기"${q?'':' style="visibility:hidden"'}>${IC.x}</button></label>`;
+const sqFocus=(el,o)=>{if(o.s&&o.f){o.f=0;const i=el.querySelector('.sqi');if(i){i.focus({preventScroll:true});i.setSelectionRange(i.value.length,i.value.length)}}};
+const sqWords=q=>msN(q).split(/\s+/).filter(Boolean);
+const sqNone=q=>`<div class="msn">‘${esc(q)}’에 대한 검색 결과가 없습니다</div>`;
 /* ===== 메모 ===== */
 /* 읽기 전용 잠금: true 이면 보는 사람이 메모를 쓰거나 지울 수 없고, 통화기록·음성 녹음 목록에도 새 항목이 생기지 않음 (직접 고칠 때만 false) */
 const LOCK=true;
+const meRow=([x,i])=>{const dn=x.items.filter(y=>y.c).length;return `<button class="xmcd" data-a="medit" data-i="${i}"><b>${esc(x.title||'제목 없음')}</b><p>${esc(x.p?x.txt.split('\n').slice(1).join(' ').trim():x.items.map(y=>y.t).join(' '))}</p><small>${esc(x.d)}${x.items.length?` · ${dn}/${x.items.length} 완료`:''}</small></button>`};
+const meFind=()=>{const q=sqWords(S.me.q);return S.me.memos.map((x,i)=>[x,i]).filter(([x])=>{const h=msN([x.title,x.p?x.txt:x.items.map(y=>y.t).join(' ')].join(' '));return q.every(w=>h.includes(w))})};
+const meBody=()=>{const q=(S.me.q||'').trim(),L=meFind();return {h:q?`검색 결과 ${L.length}`:`메모 ${L.length}`,b:L.length?L.map(meRow).join(''):sqNone(q)}};
+const meUpd=()=>{const r=meBody(),l=$('mel'),h=$('meh');if(l)l.innerHTML=r.b;if(h)h.textContent=r.h};
 V.memo=()=>{const m=S.me;
  if(m.i!=null){const x=m.memos[m.i];if(x.p)return tbar(esc(x.d))+`<div class="xc" style="padding:6px 18px 44px"><textarea class="xmtx" data-mp="1" aria-label="메모 내용" placeholder="메모를 입력하세요"${LOCK?' readonly inputmode="none"':''}>${esc(x.txt)}</textarea></div>`;return tbar(esc(x.d))+`<div class="xc" style="padding:6px 18px 44px"><input class="xmt" id="mt" data-mt="1" value="${esc(x.title)}" placeholder="제목" autocomplete="off"${LOCK?' readonly inputmode="none"':''}>${x.items.map((it,j)=>`<div class="xmi${it.c?' done':''}"><button class="xcb1"${LOCK?' tabindex="-1"':' data-a="mchk"'} data-j="${j}" aria-label="완료 표시" aria-pressed="${it.c?'true':'false'}">${it.c?'✓':''}</button><input class="xmit" data-mi="${j}" value="${esc(it.t)}" placeholder="내용" autocomplete="off"${LOCK?' readonly inputmode="none"':''}></div>`).join('')}${LOCK?'':'<button class="xmad" data-a="madd">＋ 항목 추가</button>'}</div>`}
- return tbar('메모',tb(IC.search,'검색'))+`<div class="xc">${m.memos.map((x,i)=>{const dn=x.items.filter(y=>y.c).length;return `<button class="xmcd" data-a="medit" data-i="${i}"><b>${esc(x.title||'제목 없음')}</b><p>${esc(x.p?x.txt.split('\n').slice(1).join(' ').trim():x.items.map(y=>y.t).join(' '))}</p><small>${esc(x.d)}${x.items.length?` · ${dn}/${x.items.length} 완료`:''}</small></button>`}).join('')}</div>`};
+ if(m.s){const r=meBody();return `<div class="xt"><button data-a="back" aria-label="뒤로">${IC.back}</button>${sqBar('me','메모 검색',m.q)}</div><div class="xc"><div class="xm" id="meh" style="font-size:12px;margin:5px 0 4px">${r.h}</div><div id="mel">${r.b}</div></div>`}
+ return tbar('메모',`<button data-a="meopen" aria-label="검색">${IC.search}</button>`)+`<div class="xc">${m.memos.map((x,i)=>meRow([x,i])).join('')}</div>`};
 CLS.memo=()=>'me';
-PH.memo=el=>{const m=S.me;el.querySelectorAll('.xmtx').forEach(t=>{t.style.height='auto';t.style.height=t.scrollHeight+'px'});if(m.i!=null&&m.focus!=null){const e=el.querySelector(`.xmit[data-mi="${m.focus}"]`);if(e){e.focus({preventScroll:true});e.setSelectionRange(e.value.length,e.value.length)}m.focus=null}};
-BK.memo=()=>{if(S.me.i!=null){S.me.i=null;return true}return false};
+PH.memo=el=>{const m=S.me;sqFocus(el,m);el.querySelectorAll('.xmtx').forEach(t=>{t.style.height='auto';t.style.height=t.scrollHeight+'px'});if(m.i!=null&&m.focus!=null){const e=el.querySelector(`.xmit[data-mi="${m.focus}"]`);if(e){e.focus({preventScroll:true});e.setSelectionRange(e.value.length,e.value.length)}m.focus=null}};
+BK.memo=()=>{if(S.me.i!=null){S.me.i=null;return true}if(S.me.s){S.me.s=0;S.me.q='';return true}return false};
+A.meopen=()=>{const m=S.me;m.s=1;m.q='';m.f=1};
+A.mecl=()=>{const m=S.me;m.q='';m.f=1};
 A.medit=d=>{S.me.i=+d.i};
 A.mchk=d=>{if(LOCK)return false;const it=S.me.memos[S.me.i].items[+d.j];it.c=it.c?0:1};
 A.madd=()=>{if(LOCK)return false;const m=S.me.memos[S.me.i];m.items.push({t:'',c:0});S.me.focus=m.items.length-1};
@@ -1061,9 +1079,18 @@ const ymd=(y,m,d)=>y*10000+m*100+d;
 const evs=(y,m,d)=>{const k=ymd(y,m,d);return [...D.cr.filter(r=>r[0]==m&&r[1]==d).map(r=>({t:r[2],r:1})),...D.cal.filter(e=>k>=ymd(e[0],e[1],e[2])&&k<=(e[4]?ymd(e[4],e[5],e[6]):ymd(e[0],e[1],e[2]))).map(e=>({t:e[3],g:e[4]?{s:ymd(e[0],e[1],e[2]),e:ymd(e[4],e[5],e[6]),a:e}:0}))]};
 const evDay=(y,m)=>{for(let d=1;d<=new Date(y,m,0).getDate();d++)if(evs(y,m,d).length)return d;return 1};
 const calGo=k=>{const y=Math.floor(k/100),m=k%100;Object.assign(S.ca,{y,m:m-1,sel:[y,m-1,evDay(y,m)],pick:0})};
+const caAll=()=>{const ks=calKeys(),R=[];
+ D.cr.forEach(r=>ks.forEach(k=>{const y=Math.floor(k/100),m=k%100;if(m==r[0]&&r[1]<=new Date(y,m,0).getDate())R.push({t:r[2],s:[y,m,r[1]],r:1})}));
+ D.cal.forEach(e=>R.push({t:e[3],s:[e[0],e[1],e[2]],e:e[4]?[e[4],e[5],e[6]]:null}));
+ return R.sort((a,b)=>ymd(...a.s)-ymd(...b.s))};
+const caFind=()=>{const q=sqWords(S.ca.q);return q.length?caAll().filter(r=>{const h=msN(r.t);return q.every(w=>h.includes(w))}):[]};
+const caRow=r=>{const [y,m,d]=r.s;return `<button class="xcard sqc" data-a="cago" data-y="${y}" data-m="${m}" data-d="${d}"><b>${esc(r.t)}</b><div class="sub">${r.e?`${y}년 ${m}월 ${d}일 ~ ${r.e[0]}년 ${r.e[1]}월 ${r.e[2]}일`:`${y}년 ${m}월 ${d}일 ${WD[new Date(y,m-1,d).getDay()]}요일${r.r?' · 매년 반복':''}`}</div></button>`};
+const caBody=()=>{const q=(S.ca.q||'').trim();if(!q)return {h:'',b:'<div class="msn">일정 제목으로 검색해 보세요</div>'};const L=caFind();return {h:`검색 결과 ${L.length}`,b:L.length?L.map(caRow).join(''):sqNone(q)}};
+const caUpd=()=>{const r=caBody(),l=$('cql'),h=$('cqh');if(l)l.innerHTML=r.b;if(h)h.textContent=r.h};
 V.cal=()=>{
  const c=S.ca,y=c.y,m=c.m,ks=calKeys(),i=ks.indexOf(y*100+m+1),first=new Date(y,m,1).getDay(),dim=new Date(y,m+1,0).getDate(),n=Math.ceil((first+dim)/7)*7;
  const nav=(v,l,tf)=>`<button ${ks[i+v]!=null?`data-a="ccal" data-v="${v}"`:'disabled'} aria-label="${l}"${tf?' style="transform:scaleX(-1)"':''}>${IC.back}</button>`;
+ if(c.s){const r=caBody();return `<div class="xt"><button data-a="back" aria-label="뒤로">${IC.back}</button>${sqBar('ca','일정 검색',c.q)}</div><div class="xc"><div class="xm" id="cqh" style="font-size:12px;margin:5px 0 4px">${r.h}</div><div class="xev" id="cql">${r.b}</div></div>`}
  let body;
  if(c.pick){const ys=[...new Set(ks.map(k=>Math.floor(k/100)))];body=`<div class="xmp">${ys.map(yy=>`<div class="xmy"><b>${yy}년</b><div>${ks.filter(k=>Math.floor(k/100)==yy).map(k=>`<button class="${k==y*100+m+1?'on':''}" data-a="cgo" data-k="${k}">${k%100}월</button>`).join('')}</div></div>`).join('')}</div>`}
  else{
@@ -1072,9 +1099,13 @@ V.cal=()=>{
    return `<button class="${[on?'ch':'',w==0?'sun':w==6?'sat':'',g?'hb':''].join(' ').trim()}" data-a="cday" data-d="${dd}">${dd}${g?`<span class="xbr${k==g.s?' s':''}${k==g.e?' e':''}"></span>`:''}${e.some(x=>x.r)||nd?`<span class="xdts">${e.some(x=>x.r)?'<i class="red"></i>':''}${nd?'<i></i>':''}</span>`:''}</button>`}).join('');
   const sd=c.sel[2],ev=evs(y,m+1,sd),wd=new Date(y,m,sd).getDay();
   body=`<div class="xwk">${[...WD].map(x=>`<span>${x}</span>`).join('')}</div><div class="xdy">${cells}</div><div class="xag"><div class="xdh"><small style="color:${wd==0?'#e8453c':wd==6?'#3578d4':'#777'}">${WD[wd]}요일</small><b>${sd}</b></div><div class="xev">${ev.length?ev.map(e=>`<div class="xcard"><b>${esc(e.t)}</b><div class="sub">${e.g?`${e.g.a[0]}년 ${e.g.a[1]}월 ${e.g.a[2]}일 ~ ${e.g.a[4]}년 ${e.g.a[5]}월 ${e.g.a[6]}일`:`${y}년 ${m+1}월 ${sd}일 ${WD[wd]}요일${e.r?' · 매년 반복':''}`}</div></div>`).join(''):'<div class="xm" style="font-size:13px;padding:14px 0">등록된 일정이 없습니다.</div>'}</div></div>`}
- return tbar('캘린더',tb(IC.search,'검색')+tb(IC.dots,'더보기'))+`<div class="xc"><div class="xch">${nav(-1,'이전 달')}<button class="xtt" data-a="cpick" aria-expanded="${c.pick?'true':'false'}">${y}년 ${m+1}월 <span>▾</span></button>${nav(1,'다음 달',1)}</div>${body}</div>`};
+ return tbar('캘린더',`<button data-a="caopen" aria-label="검색">${IC.search}</button>`+tb(IC.dots,'더보기'))+`<div class="xc"><div class="xch">${nav(-1,'이전 달')}<button class="xtt" data-a="cpick" aria-expanded="${c.pick?'true':'false'}">${y}년 ${m+1}월 <span>▾</span></button>${nav(1,'다음 달',1)}</div>${body}</div>`};
 CLS.cal=()=>'xw';
-BK.cal=()=>{if(S.ca.pick){S.ca.pick=0;return true}return false};
+BK.cal=()=>{if(S.ca.s){S.ca.s=0;S.ca.q='';return true}if(S.ca.pick){S.ca.pick=0;return true}return false};
+PH.cal=el=>sqFocus(el,S.ca);
+A.caopen=()=>{const c=S.ca;c.s=1;c.q='';c.f=1;c.pick=0};
+A.cacl=()=>{const c=S.ca;c.q='';c.f=1};
+A.cago=d=>{Object.assign(S.ca,{y:+d.y,m:+d.m-1,sel:[+d.y,+d.m-1,+d.d],pick:0,s:0,q:''})};
 A.ccal=d=>{const ks=calKeys(),k=ks[ks.indexOf(S.ca.y*100+S.ca.m+1)+ +d.v];if(k==null)return false;calGo(k)};
 A.cgo=d=>calGo(+d.k);
 A.cpick=()=>{S.ca.pick=!S.ca.pick};
@@ -1178,6 +1209,7 @@ ph.addEventListener('pointerup',e=>{if(gx==null)return;const dx=e.clientX-gx;gx=
 ph.addEventListener('input',e=>{
  const t=e.target;if(!t.dataset)return;
  if(t.dataset.ms!=null){S.mu.q=t.value;msUpd();const x=t.parentNode.querySelector('.msx');if(x)x.style.visibility=t.value?'visible':'hidden';return}
+ if(t.dataset.sq!=null){const me=t.dataset.sq=='me',o=me?S.me:S.ca;o.q=t.value;me?meUpd():caUpd();const x=t.parentNode.querySelector('.sqx');if(x)x.style.visibility=t.value?'visible':'hidden';return}
  if(t.dataset.gs!=null){const v=document.querySelector('#gal video');if(v&&v.duration){v.currentTime=t.value/1000*v.duration;t.style.setProperty('--p',t.value/10+'%');const e2=document.getElementById('gvt');if(e2)e2.textContent=gtm(v.currentTime)}return}
  if(t.dataset.rs!=null){if(RA){const x=S.rc.list[S.rc.p],du=rcDur(x);RA.currentTime=t.value/1000*du;const n=Math.round(t.value/1000*RAUD[x.k].wave.length);document.querySelectorAll('#rwf i').forEach((b,i)=>b.classList.toggle('on',i<n));const e2=document.getElementById('rpt');if(e2)e2.textContent=rcF(RA.currentTime*1000)}return}
  if(LOCK&&(t.dataset.mp!=null||t.dataset.mt!=null||t.dataset.mi!=null))return;
