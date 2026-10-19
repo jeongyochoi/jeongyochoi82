@@ -1273,11 +1273,13 @@ function lkOpen(){
  setTimeout(()=>lkEl.classList.add('gone'),420);
  clearTimeout(LK.t);LK.t=setTimeout(ntShow,(D.lock.delay||0)*1000);
 }
-/* 터치음: 아이폰 키보드 클릭 샘플 (샘플이 없으면 작은 팝). 화면 어디를 눌러도(잠금 화면 포함) 눌렀을 때 한 번 납니다 */
+/* 터치음: 아이폰 키보드 클릭 샘플 (샘플이 없으면 작은 팝). 화면 안의 '버튼'을 누를 때만 한 번 납니다(잠금 화면 번호키 포함) — 버튼이 아닌 곳이나 스크롤·드래그에서는 나지 않음 */
 function tapSnd(){try{tonePrep();const x=BTX;if(!x)return;if(sbPlay('tap',.8,.002))return;popAt(x,x.destination,x.currentTime+.005,620,250,.04,.1,.22,.035)}catch(_){}}
 let tcP=0;
-ph.addEventListener('pointerdown',e=>{if(!e.isPrimary)return;tonePrep();if(BTX&&BTX.state=='running'){tapSnd();tcP=1}else tcP=0},true);
-ph.addEventListener('click',()=>{if(!tcP)tapSnd();tcP=0},true);
+const tcB=e=>{const b=e.target&&e.target.closest&&e.target.closest('button,[role=button],a[href],summary,[data-a],[onclick]');return b&&!b.disabled&&b.getAttribute('aria-disabled')!='true'&&ph.contains(b)?b:null};
+/* 번호키(잠금 화면·전화 키패드)는 누르는 순간, 나머지 버튼은 눌렀다 뗀 클릭 순간에 소리가 납니다 (목록을 밀어 스크롤할 때는 소리가 나지 않게) */
+ph.addEventListener('pointerdown',e=>{tcP=0;if(!e.isPrimary)return;tonePrep();const b=tcB(e);if(!b||!b.closest('#lkpad,.xk3'))return;if(BTX&&BTX.state=='running'){tapSnd();tcP=1}},true);
+ph.addEventListener('click',e=>{if(!tcP&&tcB(e))tapSnd();tcP=0},true);
 function lkKey(k){
  tonePrep();
  if(!LK.on||!lkEl.classList.contains('pin')||LK.busy)return;
