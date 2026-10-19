@@ -346,6 +346,12 @@ img.mms{display:block;height:auto;width:160px;cursor:pointer}
 .xsg .n{flex:1;min-width:0}.xsg .n b{display:block;font-size:13.5px}.xsg .n small{color:#7a7d84}
 .xsg.on .n b{color:#0ea35a}
 .xsg .p{color:#17191c;display:flex}
+.msb{flex:1;min-width:0;display:flex;align-items:center;gap:8px;height:38px;padding:0 6px 0 12px;border-radius:19px;background:#ffffff38;color:#fff;margin-left:2px}
+.msb>svg{flex:none;width:19px;height:19px}
+.msi{flex:1;min-width:0;background:none;border:0;outline:0;color:#fff;font:inherit;font-size:14.5px;padding:0}
+.msi::placeholder{color:#ffffffc4}
+.msb .msx{width:28px;height:28px}.msb .msx svg{width:18px;height:18px}
+.msn{padding:30px 0 22px;text-align:center;color:#7a7d84;font-size:13px}
 /* 메모 */
 .xa.me{background:#fffdf3}
 .xmcd{display:block;width:100%;text-align:left;background:#fff;border-radius:16px;padding:14px;margin-bottom:10px;box-shadow:0 1px 4px #0001}
@@ -558,19 +564,18 @@ img.mms{display:block;height:auto;width:160px;cursor:pointer}
 .xms .t{flex:1;min-width:0}.xms .t b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.xms .t span{display:block;font-size:12px;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .xms .ct{display:flex;align-items:center}.xms .ct button{width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:#fff}
 .xms .xpgb{position:absolute;left:14px;right:14px;bottom:8px;height:2px;border-radius:2px;background:#fff4}.xms .xpgb i{display:block;height:100%;background:#fff;border-radius:2px}
-.xrw{display:flex;gap:12px;margin-top:12px}
-.xwd{width:104px;flex:none;border-radius:24px;background:#ffffff2e;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:10px;color:#fff}
-.xwd span{font-size:30px;line-height:1}.xwd b{font-size:22px;font-weight:700;line-height:1.1}.xwd small{font-size:12px;opacity:.92;white-space:nowrap}
+.xrw{display:flex;gap:12px;margin-top:12px;min-height:100px}
 .xtop{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .xtl{min-width:0}
-#ddw .xwd{width:94px;height:92px;margin-top:6px;padding:8px}
-.xwc{flex:none;width:140px;border-radius:24px;background:#e8e8ecec;color:#1c1c21;padding:9px 7px 10px;display:flex;flex-direction:column;text-align:center}
-.xwc .wch{text-align:center;font-size:14px;font-weight:800;line-height:1.2;margin-bottom:5px;letter-spacing:-.2px}
+.xwc{flex:none;width:140px;position:relative;border-radius:24px;background:#e8e8ecec;color:#1c1c21;text-align:center;overflow:hidden}
+.xwc .wci{position:absolute;inset:8px 7px 7px;display:flex;flex-direction:column}
+.xwc .wch{flex:none;text-align:center;font-size:13px;font-weight:800;line-height:1.1;margin-bottom:3px;letter-spacing:-.2px}
 .xwc .wcw,.xwc .wcg{display:grid;grid-template-columns:repeat(7,1fr)}
-.xwc i{font-style:normal;font-size:10.5px;line-height:17px;height:17px;display:block}
-.xwc .wcw i{font-size:9px;font-weight:700;height:15px;line-height:15px}
+.xwc .wcw{flex:none}.xwc .wcg{flex:1;min-height:0;grid-auto-rows:minmax(0,1fr)}
+.xwc i{font-style:normal;font-size:9.5px;line-height:1;display:grid;place-items:center;min-height:0}
+.xwc .wcw i{font-size:8.5px;font-weight:700;height:11px}
 .xwc .s{color:#e5453a}.xwc .t{color:#3a7bdc}
-.xwc .wcg i.on{background:#000;color:#fff;font-weight:700;border-radius:6px}
+.xwc .wcg i.on{background:#000;color:#fff;font-weight:700;border-radius:5px;justify-self:center;align-self:center;height:min(100%,13px);aspect-ratio:1}
 .xwm{flex:1;min-width:0;border-radius:24px;background:#fff;color:#22252b;padding:11px 14px;text-align:left;display:flex;flex-direction:column;gap:5px}
 .xwm .h{font-size:12px;font-weight:700;color:#7a7f89}
 .xwm .r{display:flex;flex-direction:column;gap:1px;font-size:12.5px;line-height:1.3;min-width:0}
@@ -581,7 +586,7 @@ img.mms{display:block;height:auto;width:160px;cursor:pointer}
 /* 밝은 바탕화면 위 글자 가독성 */
 #clk,#dt0,.xwx{color:#fff}
 #home .grid{text-shadow:none}
-@media(max-height:760px){#ddw .xwd{height:80px}#clk{font-size:46px}#dt0{margin-bottom:10px}.xwx{display:none}#home .grid{margin-top:12px}}
+@media(max-height:760px){#clk{font-size:46px}#dt0{margin-bottom:10px}.xwx{display:none}#home .grid{margin-top:12px}}
 
 
 .xch .xtt{width:auto;height:auto;padding:5px 10px;font-size:21px;font-weight:700;border-radius:10px}
@@ -601,7 +606,7 @@ img.mms{display:block;height:auto;width:160px;cursor:pointer}
 <body>
 <div id="ph">
   <div id="sb"><span id="tm"></span><span class="sbr" role="img" aria-label="무음 모드, Wi-Fi, 배터리 82% 충전 중"><svg width="15.5" height="14" viewBox="0 0 20 18" aria-hidden="true"><defs><mask id="sbm1"><rect width="20" height="18" fill="#fff"/><path d="M1.6 2.4 11.2 15.6" stroke="#000" stroke-width="2.3" stroke-linecap="round"/></mask></defs><g mask="url(#sbm1)"><path d="M1.3 6.7h3.5L9.5 2.4v13.2l-4.7-4.3H1.3z" fill="currentColor" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></g><path d="M14.7 2.6q2.2 1.6 0 3.2t0 3.2t0 3.2t0 3.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><svg width="17.4" height="14" viewBox="0 0 22 18" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5.9 11.9A4.4 4.4 0 0 1 12.1 11.9"/><path d="M3.2 9.2A8.2 8.2 0 0 1 14.8 9.2"/><path d="M.5 6.5A12 12 0 0 1 17.5 6.5"/></g><circle cx="9" cy="15.3" r="1.35" fill="currentColor"/><g fill="none" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><g stroke="currentColor" opacity=".5"><path d="M14 11.6v5.2M12.4 15.2 14 16.8l1.6-1.6"/></g><g stroke="currentColor"><path d="M18.2 16.8v-5.2M16.6 13.2l1.6-1.6 1.6 1.6"/></g></g></svg><b>82%</b><svg width="9.4" height="15.6" viewBox="0 0 12 20" aria-hidden="true"><defs><clipPath id="sbc"><rect x="1" y="1.9" width="10" height="16.3" rx="2.2"/></clipPath><mask id="sbm2"><rect width="12" height="20" fill="#fff"/><path d="M6.9 4.4 3.5 10.5h2.1l-.7 5.1 3.6-6.4H6.3z" fill="#000" stroke="#000" stroke-width="1.7" stroke-linejoin="round"/></mask></defs><rect x="4" y="0" width="4" height="1.9" rx=".7" fill="currentColor" opacity=".55"/><g mask="url(#sbm2)"><rect x="1" y="1.9" width="10" height="16.3" rx="2.2" fill="currentColor" opacity=".42"/><rect x="1" y="4.83" width="10" height="13.37" fill="currentColor" clip-path="url(#sbc)"/></g><path d="M6.9 4.4 3.5 10.5h2.1l-.7 5.1 3.6-6.4H6.3z" fill="currentColor"/></svg></span></div>
-  <main id="home"><div class="xtop"><div class="xtl"><div id="clk"></div><div id="dt0"></div></div><div id="ddw"></div></div><div id="hw"></div><div class="grid" id="gr"></div><div class="dock" id="dk"></div></main>
+  <main id="home"><div class="xtop"><div class="xtl"><div id="clk"></div><div id="dt0"></div></div></div><div id="hw"></div><div class="grid" id="gr"></div><div class="dock" id="dk"></div></main>
   <div id="ap"></div>
   <div class="app" id="call" role="dialog" aria-label="통화"></div>
   <div class="xtoast" id="tt" role="status"></div>
@@ -683,7 +688,7 @@ const D={
   ]},
  // 캘린더 · 매년 반복: [월, 일, 표기]
  cr:[[8,2,"내 생일"],[11,16,"비오 생일"],[10,23,"엄마 기일"]],
- // 캘린더 · 해당 연도만: [연, 월, 일, 표기, (여러 날이면 끝나는 연, 월, 일)]  ※ 여기에 날짜가 있는 달 + 아래 calm 에 적은 달만 달력에 나옵니다 (표기 앞의 * 는 그대로 보입니다)
+ // 캘린더 · 해당 연도만: [연, 월, 일, 표기, (여러 날이면 끝나는 연, 월, 일)]  ※ 여기에 날짜가 있는 달 + 아래 calm 에 적은 달만 달력에 나옵니다
  cal:[
   [2016,10,24,"음악 수행 대체"],[2016,10,31,"한국예고 전학"],
   [2016,11,5,"현수 쌤 연습실"],[2016,11,8,"비오랑 연습(저녁 6시)"],[2016,11,9,"비오랑 연습(저녁 6시)"],[2016,11,10,"비오랑 연습(아침 7시)"],[2016,11,12,"비오랑 연습 (저녁 9시 / 소강당) 🕯️"],[2016,11,13,"비오랑 연습"],[2016,11,19,"비오랑 피아노 버스킹"],
@@ -692,9 +697,9 @@ const D={
   [2026,4,1,"International Conducting Competition Brno 2026",2026,4,18],[2026,4,19,"Interview"],
   [2026,5,1,"강승운 선생님 / 자택"],[2026,5,6,"한국심포니 첫 출근"],[2026,5,6,"강비오 협연 설득"],[2026,5,6,"현철이형"],[2026,5,7,"강지혜 위원님 식사"],[2026,5,9,"피아노 삼중주 공연"],[2026,5,10,"데뷔 공연 회의. 강승운, 윤선주 선생님, 강비오)"],[2026,5,23,"바이올린 버스킹. 강비오"],[2026,5,25,"2026 대한민국 루세나 대상 / 서담아트센터"],
   [2026,6,2,"한국심포니 피아노 협연 데뷔"],[2026,6,2,"협연 뒤풀이"],[2026,6,3,"강비오 네메시스 제안 / 강비오 집"],[2026,6,3,"강비오 네메시스 설득 / 강비오 집 앞"],[2026,6,6,"Eden. 소속사 네메시스 음원 미팅. 홍재인"],[2026,6,8,"한국심포니 창단 80주년 기념 페스티벌 제작발표회"],[2026,6,8,"제작발표회 뒤풀이"],[2026,6,23,"강비오 네메시스 연습"],[2026,6,25,"강비오 네메시스 연습"],
-  [2026,7,4,"*네메시스 녹음"],[2026,7,5,"*강비오 교체 회의"],[2026,7,6,"이민성 피아니스트"],[2026,7,6,"강비오 증거 정리. 현철이형"],[2026,7,7,"홍재인"],[2026,7,8,"바이올린 연주자 동영상 확인. 강승운 선생님 / 2층 대회의실"],[2026,7,8,"네메시스 연습. 이민성 피아니스트"],[2026,7,15,"미래의 전언. NEMESIS 공연 / 8시 한국 아트센터"],[2026,7,16,"강비오 경찰서"],[2026,7,16,"사건 진술"],[2026,7,16,"보겔 녹음파일"],[2026,7,17,"증거 제출"],[2026,7,17,"강비오 석방"],[2026,7,19,"강비오 집앞"],[2026,7,21,"강비오 기자회견"],[2026,7,21,"강승운 선생님 병원"],[2026,7,22,"강승운 선생님 장례미사"],[2026,7,27,"아버지 병원"],
-  [2026,8,5,"*어깨 병원"],[2026,8,6,"비오랑 낙원상가"],[2026,8,7,"프라하 출국"],
-  [2029,5,24,"*비오한테 엽서"],[2029,6,7,"비오 엽서 받았을 날"],[2029,6,8,"비오 다시 만난 날"]
+  [2026,7,4,"네메시스 녹음"],[2026,7,5,"강비오 교체 회의"],[2026,7,6,"이민성 피아니스트"],[2026,7,6,"강비오 증거 정리. 현철이형"],[2026,7,7,"홍재인"],[2026,7,8,"바이올린 연주자 동영상 확인. 강승운 선생님 / 2층 대회의실"],[2026,7,8,"네메시스 연습. 이민성 피아니스트"],[2026,7,15,"미래의 전언. NEMESIS 공연 / 8시 한국 아트센터"],[2026,7,16,"강비오 경찰서"],[2026,7,16,"사건 진술"],[2026,7,16,"보겔 녹음파일"],[2026,7,17,"증거 제출"],[2026,7,17,"강비오 석방"],[2026,7,19,"강비오 집앞"],[2026,7,21,"강비오 기자회견"],[2026,7,21,"강승운 선생님 병원"],[2026,7,22,"강승운 선생님 장례미사"],[2026,7,27,"아버지 병원"],
+  [2026,8,5,"어깨 병원"],[2026,8,6,"비오랑 낙원상가"],[2026,8,7,"프라하 출국"],
+  [2029,5,24,"비오한테 엽서"],[2029,6,7,"비오 엽서 받았을 날"],[2029,6,8,"비오 다시 만난 날"]
  ],
  // 캘린더 · 일정이 없어도 볼 수 있는 달: [시작 연, 시작 월, 끝 연, 끝 월]  (매년 반복 일정은 이 달들에도 함께 나옵니다)
  calm:[[2029,5,2029,12]],
@@ -703,7 +708,7 @@ const D={
  // 잠금 화면: 비밀번호(pin), 번호키 위 힌트(hint), 잠금 해제 후 알림이 뜨기까지 걸리는 초(delay),
  //   알림 내용(앱 이름·보낸 사람·메시지) → swap초 뒤 msg2로 바뀌고 → hold초 뒤 사라짐,
  //   cards = 잠금 화면에 계속 보이는 가로 알림 카드들 (app 앱 이름, e 아이콘 이모티콘 또는 img 앱 아이콘, time 시각(없으면 생략), title 굵은 제목(없으면 생략), msg 내용)
- lock:{pin:"001116",hint:"힌트: 강비오 생일 00XXXX",delay:2,app:"카카오톡",from:"강비오",msg:"정요야. 오늘 생일 축하해줘서 고마워.",msg2:"잘 자고, 내일 보자",swap:4,hold:4,cards:[{app:"디데이",e:"🎂",msg:"비오 생일"},{app:"전화",img:"phone",time:"오전 9:03",title:"부재중 1통",msg:"강비오"}]},
+ lock:{pin:"001116",hint:"힌트: 강비오 생일 00XXXX",delay:5,app:"카카오톡",from:"강비오",msg:"정요야. 오늘 생일 축하해줘서 고마워.",msg2:"잘 자고, 내일 보자",swap:4,hold:4,cards:[{app:"디데이",e:"🎂",msg:"비오 생일"},{app:"전화",img:"phone",time:"오전 9:03",title:"부재중 1통",msg:"강비오"}]},
  // 휴대폰의 현재 날짜·시각 [연, 월, 일, 시(0~23), 분] — 흐르지 않고 이 값으로 고정됩니다 (홈 화면 시계·날짜, 캘린더 아이콘, 세계 시각, 새 발신 기록에 쓰임)
  now:[2029,11,16,23,59],
  // 휴대폰이 있는 곳의 시간대 (체코 프라하)
@@ -714,8 +719,8 @@ const D={
  ck:{al:[["오전 6:30","연습 시작"],["오전 7:00","기상"],["오후 2:00","레슨"]],world:[["체코","Europe/Prague"],["서울","Asia/Seoul"]]},
  // 음성 녹음: 녹음 파일 [이름, 날짜(비우면 안 보임), 길이, 음원(<script id="raud"> 블록의 이름)]  예) ["음성 001","2029.11.16 오후 11:59","00:07"]
  rec:[["강비오 Voice 001","","01:11","voice"]],
- // 음악: 처음 재생되는 곡 번호(start) / 곡 [제목, 연주자]
- mu:{start:0,songs:[["Rachmaninoff: Piano Concerto No. 2 in C minor, Op. 18 – I. Moderato","Pio Kang"],["Saint-Saëns: Danse macabre in G minor, Op. 40 (Arranged for Piano 4-Hands)","Pio Kang, Jeong yo Choi"],["Mozart: Piano Concerto No. 20 in D minor, K. 466","Pio Kang"],["Bach: Cantata BWV 106, Gottes Zeit ist die allerbeste Zeit","Pio Kang, Jeong yo Choi"],["Nemesis","Pio Kang"]]},
+ // 음악: 처음 재생되는 곡 번호(start) / 곡 [제목, 연주자, (검색용 키워드·화면에는 안 보임)]
+ mu:{start:0,songs:[["Rachmaninoff: Piano Concerto No. 2 in C minor, Op. 18 – I. Moderato","Pio Kang","라흐마니노프 피아노 협주곡 2번 강비오 피오 강"],["Saint-Saëns: Danse macabre in G minor, Op. 40 (Arranged for Piano 4-Hands)","Pio Kang, Jeong yo Choi","생상스 죽음의 무도 피아노 포핸즈 4손 강비오 최정요 정요 피오 강"],["Mozart: Piano Concerto No. 20 in D minor, K. 466","Pio Kang","모차르트 피아노 협주곡 20번 강비오 피오 강"],["Bach: Cantata BWV 106, Gottes Zeit ist die allerbeste Zeit","Pio Kang, Jeong yo Choi","바흐 칸타타 106번 강비오 최정요 정요 피오 강"],["Nemesis","Pio Kang","네메시스 강비오 피오 강"]]},
  // 홈 화면 날씨 줄 (아이콘, 기온, 장소·상태)
  wx:{i:"🌙",t:"3°",p:"체코 프라하 · 맑음"},
 };
@@ -759,6 +764,7 @@ const IC={
  mic:I('<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',26,2),
  vol:I('<path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7"/>',26,2),
  star:I('<path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 16.9 6.8 19.7l1-5.9L3.5 9.7l5.9-.8z"/>',24,1.8),
+ starF:I('<path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 16.9 6.8 19.7l1-5.9L3.5 9.7l5.9-.8z"/>',24,1.8,'#ffd43b').replace('stroke="currentColor"','stroke="#ffd43b"'),
  chat1:I('<path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.8 5.3 4.6 6.7L5.5 21.5l4.3-2.7c.7.1 1.5.2 2.2.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/>',28,1.8),
  newchat:I('<path d="M20 12.5V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h8l4 3v-3"/><path d="M12 8v6M9 11h6"/>',25,1.8),
  prev:'<svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>',
@@ -787,12 +793,11 @@ const ic=(id,l)=>{const a=APPS[id],im=window.AIMG&&AIMG[id],b=id=='talk'?unread(
 function calW(){
  const [y,mo,d]=D.now,first=new Date(y,mo-1,1).getDay(),dim=new Date(y,mo,0).getDate();
  const cells=Array.from({length:first},()=>'<i></i>').concat(Array.from({length:dim},(_,j)=>{const n=j+1,w=(first+j)%7;return `<i class="${[w==0?'s':w==6?'t':'',n==d?'on':''].join(' ').trim()}">${n}</i>`}));
- return `<button class="xwc" onclick="openApp('cal')" aria-label="달력 ${y}년 ${mo}월 ${d}일"><div class="wch">${mo}월</div><div class="wcw">${[...'일월화수목금토'].map((c,i)=>`<i class="${i==0?'s':i==6?'t':''}">${c}</i>`).join('')}</div><div class="wcg">${cells.join('')}</div></button>`;
+ return `<button class="xwc" onclick="openApp('cal')" aria-label="달력 ${y}년 ${mo}월 ${d}일"><div class="wci"><div class="wch">${mo}월</div><div class="wcw">${[...'일월화수목금토'].map((c,i)=>`<i class="${i==0?'s':i==6?'t':''}">${c}</i>`).join('')}</div><div class="wcg">${cells.join('')}</div></div></button>`;
 }
 function renderHome(){
  const m=S.mu,t=D.mu.songs[m.tr];
- $('hw').innerHTML=`<div class="xwx"><span style="font-size:22px">${D.wx.i}</span><b>${D.wx.t}</b><span>${esc(D.wx.p)}</span></div><div class="xms"><div class="art">♪</div><div class="t"><b>${esc(t[0])}</b><span>${esc(t[1])}</span></div><div class="ct"><button data-a="wprev" aria-label="이전 곡">${IC.prev}</button><button data-a="wplay" aria-label="${m.play?'일시정지':'재생'}">${m.play?IC.pause:IC.play}</button><button data-a="wnext" aria-label="다음 곡">${IC.next}</button></div><div class="xpgb"><i style="width:${m.prog}%"></i></div></div><div class="xrw">${calW()}<button class="xwm" onclick="openApp('memo')" aria-label="메모"><div class="h">메모</div>${S.me.memos.slice(0,3).map(x=>`<div class="r"><span>${esc(x.title||'제목 없음')}</span><small>${esc(x.d)}</small></div>`).join('')}</button></div>`;
- $('ddw').innerHTML=`<div class="xwd" role="img" aria-label="${esc(D.dd.t)} ${ddText()}"><span>${D.dd.e}</span><b>${ddText()}</b><small>${esc(D.dd.t)}</small></div>`;
+ $('hw').innerHTML=`<div class="xwx"><span style="font-size:22px">${D.wx.i}</span><b>${D.wx.t}</b><span>${esc(D.wx.p)}</span></div><div class="xms"><div class="art">♪</div><div class="t"><b>${esc(t[0])}</b><span>${esc(t[1])}</span></div><div class="ct"><button data-a="wprev" aria-label="이전 곡">${IC.prev}</button><button data-a="wplay" aria-label="${m.play?'일시정지':'재생'}">${m.play?IC.pause:IC.play}</button><button data-a="wnext" aria-label="다음 곡">${IC.next}</button></div><div class="xpgb"><i style="width:${m.prog}%"></i></div></div><div class="xrw">${calW()}<button class="xwm" onclick="openApp('memo')" aria-label="메모"><div class="h">메모</div>${S.me.memos.slice(0,2).map(x=>`<div class="r"><span>${esc(x.title||'제목 없음')}</span><small>${esc(x.d)}</small></div>`).join('')}</button></div>`;
  $('gr').innerHTML=GRID.map(id=>ic(id,1)).join('');
  $('dk').innerHTML=DOCK.map(id=>ic(id,0)).join('');
 }
@@ -824,6 +829,7 @@ function resetApp(id){
  else if(id=='clock')S.ck.tab='alarm';
  else if(id=='rec'){S.rc.p=null;if(RA)RA.pause()}
  else if(id=='vid')S.yt={v:'home',from:'home',c:''};
+ else if(id=='mus'){S.mu.s=0;S.mu.q=''}
 }
 function draw(keep){
  if(!cur||cur=='sms')return;
@@ -883,7 +889,11 @@ function callV(){
 }
 const paintCall=()=>{if(CL)$('call').innerHTML=callV()};
 let BTX=null;
-const tonePrep=()=>{try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;if(!BTX)BTX=new AC();if(BTX.state=='suspended')BTX.resume()}catch(_){}};
+const tonePrep=()=>{try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;if(!BTX)BTX=new AC();if(BTX.state=='suspended'){const p=BTX.resume();if(p&&p.catch)p.catch(()=>{})}}catch(_){}};
+/* 알림 도착음 '띵': 맑은 종소리(C6 기본음 + 배음)가 1초 남짓 울리다 사라짐 */
+function ding(){try{tonePrep();const x=BTX;if(!x)return;const t=x.currentTime+.02,out=x.createGain();out.gain.value=.55;out.connect(x.destination);
+ [[1046.5,.34,1.3],[2093,.13,.75],[3136,.05,.4]].forEach(([f,v,d])=>{const o=x.createOscillator(),g=x.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.006);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(out);o.start(t);o.stop(t+d+.05)});
+ setTimeout(()=>{try{out.disconnect()}catch(_){}},1700)}catch(_){}}
 /* 뚜루루 뚜루루: 1초 울리고 1.2초 쉬는 발신음 (440+480Hz를 20Hz로 떨어 '르르르' 느낌) */
 function ringTones(x,dst,t,secs){
  const L=[];
@@ -945,7 +955,7 @@ const kmsgs=r=>{let pv=null;return r[3].map((m,i)=>{
  return `<div class="xkr${first?' f':''}">${first?`<button class="xkp" style="background:${sbg(sn)}" data-a="kprof" data-n="${esc(sn)}" aria-label="${esc(sn)} 프로필 보기">${esc(ini(sn))}</button>`:'<div class="xkp sp"></div>'}<div class="xkcol">${first?`<div class="xkn1">${esc(sn)}</div>`:''}<div class="xkl"><div class="xkb">${esc(m[1])}</div>${tm}</div></div></div>`}).join('')};
 V.talk=()=>{
  const k=S.tk,r=k.rooms[k.i];
- if(k.v=='profile'){const pn=k.pn||r[0],fr=k.pf,st=fr?((D.fr.find(x=>x[0]==pn)||[])[1]||''):(r[4]&&!r[5]?r[4]:'');return `<div class="xpt1"><button data-a="back" aria-label="닫기">${IC.x}</button><div style="display:flex">${tb(IC.star,'즐겨찾기')}${tb(IC.gear,'설정')}</div></div><div class="xpm1"><div class="xpph" style="background:${sbg(pn)}">${esc(ini(pn))}</div><div class="xpnm">${esc(pn)}</div>${st?`<div class="xpst">${esc(st)}</div>`:''}</div><div class="xpact">${!fr&&r[5]?'<button data-a="toast" data-t="1:1 채팅을 시작할 수 없습니다"><i>'+IC.chat1+'</i>1:1 채팅</button><button data-a="toast" data-t="보이스톡을 연결할 수 없습니다"><i>'+IC.phone+'</i>보이스톡</button>':`<button data-a="kpchat"><i>${IC.chat1}</i>1:1 채팅</button><button data-a="kpcall"><i>${IC.phone}</i>보이스톡</button>`}<button data-a="toast" data-t="페이스톡을 연결할 수 없습니다"><i>${IC.video}</i>페이스톡</button></div>`;}
+ if(k.v=='profile'){const pn=k.pn||r[0],fr=k.pf,st=fr?((D.fr.find(x=>x[0]==pn)||[])[1]||''):(r[4]&&!r[5]?r[4]:'');return `<div class="xpt1"><button data-a="back" aria-label="닫기">${IC.x}</button><div style="display:flex">${pn=='강비오'?`<button data-a="toast" data-t="즐겨찾기" aria-label="즐겨찾기">${IC.starF}</button>`:tb(IC.star,'즐겨찾기')}${tb(IC.gear,'설정')}</div></div><div class="xpm1"><div class="xpph" style="background:${sbg(pn)}">${esc(ini(pn))}</div><div class="xpnm">${esc(pn)}</div>${st?`<div class="xpst">${esc(st)}</div>`:''}</div><div class="xpact">${!fr&&r[5]?'<button data-a="toast" data-t="1:1 채팅을 시작할 수 없습니다"><i>'+IC.chat1+'</i>1:1 채팅</button><button data-a="toast" data-t="보이스톡을 연결할 수 없습니다"><i>'+IC.phone+'</i>보이스톡</button>':`<button data-a="kpchat"><i>${IC.chat1}</i>1:1 채팅</button><button data-a="kpcall"><i>${IC.phone}</i>보이스톡</button>`}<button data-a="toast" data-t="페이스톡을 연결할 수 없습니다"><i>${IC.video}</i>페이스톡</button></div>`;}
  if(k.v=='room')return tbar(esc(r[0])+(r[5]?`<small class="xkcn">${r[5]}</small>`:''),tb(IC.search,'검색')+tb(IC.menu,'메뉴'))+`<div class="xc" style="padding:4px 14px 12px">${kmsgs(r)}</div><div class="xkin"><span class="xkf${r[6]?' dr':''}">${r[6]?esc(r[6]):'메시지 입력'}</span><span class="xksd${r[6]?' on':''}">전송</span></div>`;
  if(k.v=='friends'){const me=D.me[0],L=[...D.fr].sort((a,b)=>a[0].localeCompare(b[0],'ko'));return `<div class="xt"><button data-a="back" aria-label="뒤로">${IC.back}</button><strong style="font-size:22px">친구</strong><div class="xr">${tb(IC.search,'검색')}${tb(KADD,'친구 추가')}${tb(IC.gear,'설정')}</div></div><div class="xc" style="padding-top:2px"><div class="xkc1"><div class="xkav" style="background:#3e8bff">${esc(ini(me))}</div><div class="t"><strong>${esc(me)}</strong></div></div><div class="xfh">친구 ${L.length}</div>${L.map(f=>`<button class="xkc1" data-a="kprof" data-n="${esc(f[0])}" data-f="1"><div class="xkav" style="background:${sbg(f[0])}">${esc(ini(f[0]))}</div><div class="t"><strong>${esc(f[0])}</strong>${f[1]?`<p>${esc(f[1])}</p>`:''}</div></button>`).join('')}</div>${kbar('friend')}`}
  return `<div class="xt"><button data-a="back" aria-label="뒤로">${IC.back}</button><strong style="font-size:22px">채팅</strong><div class="xr">${tb(IC.search,'검색')}${tb(IC.newchat,'새 채팅')}${tb(IC.gear,'설정')}</div></div><div class="xc" style="padding-top:2px">${k.rooms.map((x,i)=>`<button class="xkc1" data-a="kroom" data-i="${i}"><div class="xkav" style="background:${x[5]?C[k.rooms.slice(0,i).filter(y=>y[5]).length%6]:sbg(x[0])}">${esc(ini(x[0]))}</div><div class="t"><strong>${esc(x[0])}${x[5]?`<small class="xkcn">${x[5]}</small>`:''}</strong><p>${esc(last(x[3]).replace(/\n+/g,' '))}</p></div><div class="xmeta"><span>${x[1]}</span>${x[2]?`<span class="xbadge">${x[2]}</span>`:''}</div></button>`).join('')}</div>${kbar()}`;
@@ -1056,7 +1066,18 @@ V.clock=()=>{
 A.ctab=d=>{S.ck.tab=d.t};
 A.altog=d=>{const a=S.ck.al[+d.i];a.on=!a.on};
 /* ===== 음악 ===== */
-V.mus=()=>{const m=S.mu;return tbar('음악',tb(IC.search,'검색'))+`<div class="xc"><div class="xmh">지금 듣는 음악</div><div class="xmc"><strong>내 플레이리스트</strong><div class="xm" style="font-size:12px;margin:5px 0 4px">자주 듣는 곡</div>${D.mu.songs.map((s,i)=>`<button class="xsg${m.tr==i?' on':''}" data-a="msong" data-i="${i}" aria-label="${esc(s[0])} 재생"><div class="a">♪</div><div class="n"><b>${esc(s[0])}</b><small>${esc(s[1])}</small></div><span class="p">${m.tr==i&&m.play?IC.fpause:IC.fplay}</span></button>`).join('')}</div></div>`};
+const msN=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').normalize('NFC').toLowerCase();
+const msFind=()=>{const q=msN(S.mu.q).split(/\s+/).filter(Boolean);return D.mu.songs.map((s,i)=>[s,i]).filter(([s])=>{const h=msN(s.join(' '));return q.every(w=>h.includes(w))})};
+const msRow=([s,i])=>{const m=S.mu;return `<button class="xsg${m.tr==i?' on':''}" data-a="msong" data-i="${i}" aria-label="${esc(s[0])} 재생"><div class="a">♪</div><div class="n"><b>${esc(s[0])}</b><small>${esc(s[1])}</small></div><span class="p">${m.tr==i&&m.play?IC.fpause:IC.fplay}</span></button>`};
+const msBody=()=>{const q=(S.mu.q||'').trim(),L=msFind();return {h:q?`검색 결과 ${L.length}`:'자주 듣는 곡',b:L.length?L.map(msRow).join(''):`<div class="msn">‘${esc(q)}’에 대한 검색 결과가 없습니다</div>`}};
+const msUpd=()=>{const r=msBody(),l=$('msl'),h=$('msh');if(l)l.innerHTML=r.b;if(h)h.textContent=r.h};
+V.mus=()=>{const m=S.mu;
+ if(m.s){const r=msBody();return `<div class="xt"><button data-a="back" aria-label="뒤로">${IC.back}</button><label class="msb">${IC.search}<input class="msi" data-ms type="text" value="${esc(m.q)}" placeholder="곡명, 연주자 검색" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="음악 검색"><button class="msx" data-a="mscl" aria-label="검색어 지우기"${m.q?'':' style="visibility:hidden"'}>${IC.x}</button></label></div><div class="xc"><div class="xmc" style="margin-top:6px"><div class="xm" id="msh" style="font-size:12px;margin:5px 0 4px">${r.h}</div><div id="msl">${r.b}</div></div></div>`}
+ return tbar('음악',`<button data-a="msopen" aria-label="검색">${IC.search}</button>`)+`<div class="xc"><div class="xmh">지금 듣는 음악</div><div class="xmc"><strong>내 플레이리스트</strong><div class="xm" style="font-size:12px;margin:5px 0 4px">자주 듣는 곡</div>${D.mu.songs.map((s,i)=>msRow([s,i])).join('')}</div></div>`};
+A.msopen=()=>{const m=S.mu;m.s=1;m.q='';m.f=1};
+A.mscl=()=>{const m=S.mu;m.q='';m.f=1};
+BK.mus=()=>{const m=S.mu;if(m.s){m.s=0;m.q='';return true}return false};
+PH.mus=el=>{const m=S.mu;if(m.s&&m.f){m.f=0;const i=el.querySelector('.msi');if(i){i.focus({preventScroll:true});i.setSelectionRange(i.value.length,i.value.length)}}};
 CLS.mus=()=>'mu';
 LT.mus=()=>true;
 A.msong=d=>{const i=+d.i;if(S.mu.tr==i)S.mu.play=!S.mu.play;else{S.mu.tr=i;S.mu.play=true;S.mu.prog=6}};
@@ -1125,6 +1146,7 @@ ph.addEventListener('pointercancel',()=>{gx=null});
 ph.addEventListener('pointerup',e=>{if(gx==null)return;const dx=e.clientX-gx;gx=null;if(Math.abs(dx)>45){A.gnav({d:dx<0?1:-1});draw()}});
 ph.addEventListener('input',e=>{
  const t=e.target;if(!t.dataset)return;
+ if(t.dataset.ms!=null){S.mu.q=t.value;msUpd();const x=t.parentNode.querySelector('.msx');if(x)x.style.visibility=t.value?'visible':'hidden';return}
  if(t.dataset.gs!=null){const v=document.querySelector('#gal video');if(v&&v.duration){v.currentTime=t.value/1000*v.duration;t.style.setProperty('--p',t.value/10+'%');const e2=document.getElementById('gvt');if(e2)e2.textContent=gtm(v.currentTime)}return}
  if(t.dataset.rs!=null){if(RA){const x=S.rc.list[S.rc.p],du=rcDur(x);RA.currentTime=t.value/1000*du;const n=Math.round(t.value/1000*RAUD[x.k].wave.length);document.querySelectorAll('#rwf i').forEach((b,i)=>b.classList.toggle('on',i<n));const e2=document.getElementById('rpt');if(e2)e2.textContent=rcF(RA.currentTime*1000)}return}
  if(LOCK&&(t.dataset.mp!=null||t.dataset.mt!=null||t.dataset.mi!=null))return;
@@ -1156,6 +1178,7 @@ function lkOpen(){
  clearTimeout(LK.t);LK.t=setTimeout(ntShow,(D.lock.delay||0)*1000);
 }
 function lkKey(k){
+ tonePrep();
  if(!LK.on||!lkEl.classList.contains('pin')||LK.busy)return;
  const pin=D.lock.pin;
  if(k=='del')LK.buf=LK.buf.slice(0,-1);else if(LK.buf.length<pin.length)LK.buf+=k;
@@ -1186,12 +1209,12 @@ function ntShow(){
  const L=D.lock,im=window.AIMG&&AIMG.talk;
  nt.innerHTML=`<div class="nth">${im?`<img src="${im}" alt="" draggable="false">`:''}<span>${esc(L.app)}</span><small>· 지금</small></div><div class="ntb"><div class="ntt"><b>${esc(L.from)}</b><span>${esc(L.msg)}</span></div><div class="nta" style="background:${sbg(L.from)}">${esc(ini(L.from))}</div></div>`;
  nt.setAttribute('aria-label',`${L.app} 알림, ${L.from}: ${L.msg}`);
- nt.classList.add('on');clearTimeout(nt._h);
+ nt.classList.add('on');ding();clearTimeout(nt._h);
  nt._h=setTimeout(()=>{ntSwap();nt._h=setTimeout(ntHide,(L.hold||4)*1000)},(L.swap||4)*1000);
 }
 function ntSwap(){
  const L=D.lock,s=nt.querySelector('.ntt span');if(!s||!L.msg2)return;
- s.classList.add('sw');setTimeout(()=>{s.textContent=L.msg2;s.classList.remove('sw')},170);
+ ding();s.classList.add('sw');setTimeout(()=>{s.textContent=L.msg2;s.classList.remove('sw')},170);
  nt.setAttribute('aria-label',`${L.app} 알림, ${L.from}: ${L.msg2}`);
 }
 function ntHide(){nt.classList.remove('on');clearTimeout(nt._h)}
@@ -1220,7 +1243,7 @@ $('nv').addEventListener('click',()=>{const n=Date.now();nvN=n-nvT<700?nvN+1:1;n
 lkLock(true);
 renderHome();tick();setInterval(tick,3e4);
 /* 홈 음악 위젯 진행 바 (소리는 나지 않는 장식) */
-setInterval(()=>{const m=S.mu;if(!m.play)return;m.prog+=.8;if(m.prog>=100){m.prog=0;m.tr=m.tr<D.mu.songs.length-1?m.tr+1:0;renderHome();if(cur=='mus')draw(true);return}document.querySelectorAll('#hw .xpgb i').forEach(e=>{e.style.width=m.prog+'%'})},1000);
+setInterval(()=>{const m=S.mu;if(!m.play)return;m.prog+=.8;if(m.prog>=100){m.prog=0;m.tr=m.tr<D.mu.songs.length-1?m.tr+1:0;renderHome();if(cur=='mus'){m.s?msUpd():draw(true)}return}document.querySelectorAll('#hw .xpgb i').forEach(e=>{e.style.width=m.prog+'%'})},1000);
 
 </script>
 </body>
