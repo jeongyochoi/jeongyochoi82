@@ -241,7 +241,9 @@ img.mms{display:block;height:auto;width:160px;cursor:pointer}
 .xkf{flex:1;background:#f2f3f5;border-radius:18px;padding:10px 14px;font-size:13.5px;color:#aaa}
 .xkf.dr{color:#1c1c1e}
 .xksd.on{background:#fee500;color:#3c1e1e}
-.xksd{background:#eee;color:#bbb;border-radius:18px;padding:10px 14px;font-size:13px;font-weight:700}
+.xksd{background:#eee;color:#bbb;border-radius:18px;padding:10px 14px;font-size:13px;font-weight:700;flex:none;line-height:1.4;transition:transform .26s cubic-bezier(.34,1.56,.64,1),background-color .16s,box-shadow .16s;-webkit-user-select:none;user-select:none;touch-action:manipulation}
+.xksd:active,.xksd.pr{transform:scale(.87);background:#dcdcdc;transition-duration:.08s,.08s,.08s}
+.xksd.on:active,.xksd.on.pr{background:#e9cf00;box-shadow:inset 0 2px 6px rgba(60,30,30,.22)}
 /* 톡 프로필 */
 .ytlg{flex:1;min-width:0;display:flex;align-items:center;gap:8px}
 .ytlg img{width:27px;height:27px;border-radius:7px;display:block}
@@ -1018,7 +1020,7 @@ V.talk=()=>{
  if(k.pv!=null){const m=r[3][k.pv],key=/^@img:(\S+)$/.exec(m[1])[1];let dt='';for(let j=k.pv;j>=0;j--)if(r[3][j].length<3){dt=r[3][j][0];break}
   return `<div class="xpv"><div class="xpvt"><button data-a="kpvx" aria-label="닫기">${IC.x}</button><div class="xpvi"><b>${esc(m[3]||r[0])}</b><small>${esc((dt+' '+m[2]).trim())}</small></div><button data-a="kdl" data-k="${esc(key)}" aria-label="사진 저장">${IC.dl}</button></div><div class="xpvb"><img src="${GIMG[key]}" alt="사진" draggable="false"></div></div>`}
  if(k.v=='profile'){const pn=k.pn||r[0],fr=k.pf,st=fr?((D.fr.find(x=>x[0]==pn)||[])[1]||''):(r[4]&&!r[5]?r[4]:'');return `<div class="xpt1"><button data-a="back" aria-label="닫기">${IC.x}</button><div style="display:flex">${pn=='강비오'?`<button data-a="toast" data-t="즐겨찾기" aria-label="즐겨찾기">${IC.starF}</button>`:tb(IC.star,'즐겨찾기')}${tb(IC.gear,'설정')}</div></div><div class="xpm1"><div class="xpph" style="background:${sbg(pn)}">${esc(ini(pn))}</div><div class="xpnm">${esc(pn)}</div>${st?`<div class="xpst">${esc(st)}</div>`:''}</div><div class="xpact">${!fr&&r[5]?'<button data-a="toast" data-t="1:1 채팅을 시작할 수 없습니다"><i>'+IC.chat1+'</i>1:1 채팅</button><button data-a="toast" data-t="보이스톡을 연결할 수 없습니다"><i>'+IC.phone+'</i>보이스톡</button>':`<button data-a="kpchat"><i>${IC.chat1}</i>1:1 채팅</button><button data-a="kpcall"><i>${IC.phone}</i>보이스톡</button>`}<button data-a="toast" data-t="페이스톡을 연결할 수 없습니다"><i>${IC.video}</i>페이스톡</button></div>`;}
- if(k.v=='room')return tbar(esc(r[0])+(r[5]?`<small class="xkcn">${r[5]}</small>`:''),tb(IC.search,'검색')+tb(IC.menu,'메뉴'))+`<div class="xc" style="padding:4px 14px 12px">${kmsgs(r)}</div><div class="xkin"><span class="xkf${r[6]?' dr':''}">${r[6]?esc(r[6]):'메시지 입력'}</span><span class="xksd${r[6]?' on':''}">전송</span></div>`;
+ if(k.v=='room')return tbar(esc(r[0])+(r[5]?`<small class="xkcn">${r[5]}</small>`:''),tb(IC.search,'검색')+tb(IC.menu,'메뉴'))+`<div class="xc" style="padding:4px 14px 12px">${kmsgs(r)}</div><div class="xkin"><span class="xkf${r[6]?' dr':''}">${r[6]?esc(r[6]):'메시지 입력'}</span><button type="button" class="xksd${r[6]?' on':''}" data-a="ksend" aria-label="전송">전송</button></div>`;
  if(k.v=='friends'){const me=D.me[0],L=[...D.fr].sort((a,b)=>a[0].localeCompare(b[0],'ko'));return `<div class="xt"><button data-a="back" aria-label="뒤로">${IC.back}</button><strong style="font-size:22px">친구</strong><div class="xr">${tb(IC.search,'검색')}${tb(KADD,'친구 추가')}${tb(IC.gear,'설정')}</div></div><div class="xc" style="padding-top:2px"><div class="xkc1"><div class="xkav" style="background:#3e8bff">${esc(ini(me))}</div><div class="t"><strong>${esc(me)}</strong></div></div><div class="xfh">친구 ${L.length}</div>${L.map(f=>`<button class="xkc1" data-a="kprof" data-n="${esc(f[0])}" data-f="1"><div class="xkav" style="background:${sbg(f[0])}">${esc(ini(f[0]))}</div><div class="t"><strong>${esc(f[0])}</strong>${f[1]?`<p>${esc(f[1])}</p>`:''}</div></button>`).join('')}</div>${kbar('friend')}`}
  return `<div class="xt"><button data-a="back" aria-label="뒤로">${IC.back}</button><strong style="font-size:22px">채팅</strong><div class="xr">${tb(IC.search,'검색')}${tb(IC.newchat,'새 채팅')}${tb(IC.gear,'설정')}</div></div><div class="xc" style="padding-top:2px">${k.rooms.map((x,i)=>`<button class="xkc1" data-a="kroom" data-i="${i}"><div class="xkav" style="background:${x[5]?C[k.rooms.slice(0,i).filter(y=>y[5]).length%6]:sbg(x[0])}">${esc(ini(x[0]))}</div><div class="t"><strong>${esc(x[0])}${x[5]?`<small class="xkcn">${x[5]}</small>`:''}</strong><p>${esc(last(x[3]).replace(/\n+/g,' ').replace(/^@img:\S+$/,'사진'))}</p></div><div class="xmeta"><span>${x[1]}</span>${x[2]?`<span class="xbadge">${x[2]}</span>`:''}</div></button>`).join('')}</div>${kbar()}`;
 };
@@ -1026,6 +1028,7 @@ CLS.talk=()=>S.tk.pv!=null?'tv':({list:'tk',friends:'tk',room:'tr',profile:'tp'}
 LT.talk=()=>S.tk.v=='profile'||S.tk.pv!=null;
 PH.talk=el=>{if(S.tk.v=='room'&&S.tk.pv==null){const c=el.querySelector('.xc');c.scrollTop=S.tk.sy!=null?S.tk.sy:c.scrollHeight;S.tk.sy=null}};
 BK.talk=()=>{const k=S.tk;if(k.pv!=null){k.pv=null;return true}if(k.v=='profile'){k.v=k.pf?'friends':'room';return true}if(k.v=='room'){k.v='list';return true}return false};
+A.ksend=()=>false;
 A.kroom=d=>{S.tk.i=+d.i;S.tk.rooms[S.tk.i][2]=0;S.tk.v='room'};
 A.kprof=d=>{S.tk.v='profile';S.tk.pn=d.n||'';S.tk.pf=d.f?1:0};
 A.ktab=d=>{S.tk.v=d.t=='friends'?'friends':'list';S.tk.pf=0};
@@ -1275,6 +1278,10 @@ function lkOpen(){
 }
 /* 터치음: 아이폰 키보드 클릭 샘플 (샘플이 없으면 작은 팝). 화면 안의 '버튼'을 누를 때만 한 번 납니다(잠금 화면 번호키 포함) — 버튼이 아닌 곳이나 스크롤·드래그에서는 나지 않음 */
 function tapSnd(){try{tonePrep();const x=BTX;if(!x)return;if(sbPlay('tap',.8,.002))return;popAt(x,x.destination,x.currentTime+.005,620,250,.04,.1,.22,.035)}catch(_){}}
+/* 전송 버튼 눌림 모션 (모션만 · 메시지는 전송되지 않음) */
+ph.addEventListener('pointerdown',e=>{const b=e.target&&e.target.closest&&e.target.closest('.xksd');if(!b||!e.isPrimary)return;b.classList.add('pr');b._pt=Date.now()},true);
+const ksUp=()=>{document.querySelectorAll('.xksd.pr').forEach(b=>{setTimeout(()=>b.classList.remove('pr'),Math.max(0,140-(Date.now()-(b._pt||0))))})};
+addEventListener('pointerup',ksUp,true);addEventListener('pointercancel',ksUp,true);
 let tcP=0;
 const tcB=e=>{const b=e.target&&e.target.closest&&e.target.closest('button,[role=button],a[href],summary,[data-a],[onclick]');return b&&!b.disabled&&b.getAttribute('aria-disabled')!='true'&&ph.contains(b)?b:null};
 /* 번호키(잠금 화면·전화 키패드)는 누르는 순간, 나머지 버튼은 눌렀다 뗀 클릭 순간에 소리가 납니다 (목록을 밀어 스크롤할 때는 소리가 나지 않게) */
