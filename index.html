@@ -922,9 +922,9 @@ function busyTone(){try{tonePrep();const x=BTX;if(!x)return;const t=x.currentTim
  [0,1,2].forEach(i=>{const o=x.createOscillator(),g=x.createGain(),s=t+i*.4;o.type='sine';o.frequency.value=350;
   g.gain.setValueAtTime(0,s);g.gain.linearRampToValueAtTime(.22,s+.02);g.gain.setValueAtTime(.22,s+.22);g.gain.linearRampToValueAtTime(0,s+.26);
   o.connect(g);g.connect(x.destination);o.start(s);o.stop(s+.3)})}catch(_){}}
-/* 통화 연결·종료 신호음: 낮고 차분한 두 음 (연결 = 솔→레로 올라가고, 종료 = 레→솔로 내려가며 마무리, 0.4초 남짓) */
+/* 통화 신호음: 연결 = 처음 만든 '띠링'(880→1318Hz, 0.3초 남짓), 종료 = 낮고 차분한 두 음(레→솔, 0.4초 남짓) */
 function sigTone(up){try{tonePrep();const x=BTX;if(!x)return;const t=x.currentTime+.02,out=x.createGain();out.gain.value=.6;out.connect(x.destination);
- (up?[[392,0,.22,.05],[587.3,.14,.42,.09]]:[[587.3,0,.22,.05],[392,.14,.42,.09]]).forEach(([f,d,l,h])=>{const o=x.createOscillator(),g=x.createGain(),s=t+d;o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,s);g.gain.linearRampToValueAtTime(.4,s+.02);g.gain.setValueAtTime(.4,s+.02+h);g.gain.exponentialRampToValueAtTime(.0001,s+l);o.connect(g);g.connect(out);o.start(s);o.stop(s+l+.03)});
+ (up?[[880,0,.14,0,'triangle',.34,.008],[1318.5,.12,.32,0,'triangle',.34,.008]]:[[587.3,0,.22,.05,'sine',.4,.02],[392,.14,.42,.09,'sine',.4,.02]]).forEach(([f,d,l,h,ty,pk,at])=>{const o=x.createOscillator(),g=x.createGain(),s=t+d;o.type=ty;o.frequency.value=f;g.gain.setValueAtTime(0,s);g.gain.linearRampToValueAtTime(pk,s+at);if(h)g.gain.setValueAtTime(pk,s+at+h);g.gain.exponentialRampToValueAtTime(.0001,s+l);o.connect(g);g.connect(out);o.start(s);o.stop(s+l+.03)});
  setTimeout(()=>{try{out.disconnect()}catch(_){}},1000)}catch(_){}}
 /* 강비오 통화 음성: mp3를 미리 해독해 두었다가 연결되면 재생 */
 const VB=[];
@@ -946,8 +946,8 @@ function startCall(name,lines,from){
    pb.then(buf=>{
     if(CL!==c||c.state!='on')return;
     const x=BTX;let dur=0;
-    if(x&&buf){try{const s=x.createBufferSource();s.buffer=buf;s.connect(x.destination);s.start(x.currentTime+.5);c.vs=s;dur=buf.duration}catch(_){}}
-    c.t2=setTimeout(()=>{if(CL!==c||c.state!='on')return;busyTone();endCall(1)},(dur+.5+(V.gap==null?2:V.gap))*1000)})
+    if(x&&buf){try{const s=x.createBufferSource();s.buffer=buf;s.connect(x.destination);s.start(x.currentTime+.35);c.vs=s;dur=buf.duration}catch(_){}}
+    c.t2=setTimeout(()=>{if(CL!==c||c.state!='on')return;busyTone();endCall(1)},(dur+.35+(V.gap==null?2:V.gap))*1000)})
   },((n-1)*2.2+1.35)*1000);
   return false}
  if(ring){ringStart(c,D.ring);c.t0=setTimeout(()=>{if(CL!==c||c.state!='dial')return;ringStop(c);busyTone();endCall(1)},D.ring*1000);return false}
