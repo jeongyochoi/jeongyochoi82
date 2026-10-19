@@ -775,7 +775,7 @@ const IC={
  x:I('<path d="M5 5l14 14M19 5 5 19"/>',26,2),
  bksp:I('<path d="M9 5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-6-7 6-7z"/><path d="M12.5 9.5l5 5M17.5 9.5l-5 5"/>',30,1.7),
  mic:I('<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',26,2),
- vol:I('<path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7"/>',26,2),
+ vol:I('<path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M19 5.5a9 9 0 0 1 0 13"/>',26,2),
  star:I('<path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 16.9 6.8 19.7l1-5.9L3.5 9.7l5.9-.8z"/>',24,1.8),
  starF:I('<path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 16.9 6.8 19.7l1-5.9L3.5 9.7l5.9-.8z"/>',24,1.8,'#ffd43b').replace('stroke="currentColor"','stroke="#ffd43b"'),
  dl:I('<path d="M12 4v11M7 11l5 5 5-5M5 20h14"/>',24,1.9),
@@ -922,6 +922,10 @@ function busyTone(){try{tonePrep();const x=BTX;if(!x)return;const t=x.currentTim
  [0,1,2].forEach(i=>{const o=x.createOscillator(),g=x.createGain(),s=t+i*.4;o.type='sine';o.frequency.value=440;
   g.gain.setValueAtTime(0,s);g.gain.linearRampToValueAtTime(.22,s+.02);g.gain.setValueAtTime(.22,s+.22);g.gain.linearRampToValueAtTime(0,s+.26);
   o.connect(g);g.connect(x.destination);o.start(s);o.stop(s+.3)})}catch(_){}}
+/* 통화 연결·종료 신호음: 짧은 두 음 (연결 = 올라가는 '띠링', 종료 = 내려가는 '띠롱', 0.3초 남짓) */
+function sigTone(up){try{tonePrep();const x=BTX;if(!x)return;const t=x.currentTime+.02,out=x.createGain();out.gain.value=.6;out.connect(x.destination);
+ (up?[[880,0,.14],[1318.5,.12,.32]]:[[1174.7,0,.14],[784,.12,.32]]).forEach(([f,d,l])=>{const o=x.createOscillator(),g=x.createGain(),s=t+d;o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(0,s);g.gain.linearRampToValueAtTime(.34,s+.008);g.gain.exponentialRampToValueAtTime(.0001,s+l);o.connect(g);g.connect(out);o.start(s);o.stop(s+l+.03)});
+ setTimeout(()=>{try{out.disconnect()}catch(_){}},900)}catch(_){}}
 /* 강비오 통화 음성: mp3를 미리 해독해 두었다가 연결되면 재생 */
 const VB=[];
 function voiceBuf(k){if(VB[k]!==undefined)return VB[k];tonePrep();return VB[k]=new Promise(res=>{try{const u=VAUD[k],b=atob(u.split(',')[1]),a8=new Uint8Array(b.length);for(let i=0;i<b.length;i++)a8[i]=b.charCodeAt(i);const x=BTX;if(!x){VB[k]=undefined;res(null);return}const ok=r=>res(r),no=()=>{VB[k]=undefined;res(null)};const p=x.decodeAudioData(a8.buffer,ok,no);if(p&&p.catch)p.catch(no)}catch(_){VB[k]=undefined;res(null)}})}
@@ -937,20 +941,20 @@ function startCall(name,lines,from){
   ringStart(c,(n-1)*2.2+1);
   c.t0=setTimeout(()=>{
    if(CL!==c||c.state!='dial')return;
-   c.state='on';c.st=Date.now();ringStop(c);paintCall();
+   c.state='on';c.st=Date.now();ringStop(c);sigTone(1);paintCall();
    c.ti=setInterval(()=>{const e=$('call').querySelector('.xct');if(e&&CL===c&&c.state=='on')e.textContent=cfmt()},1000);
    pb.then(buf=>{
     if(CL!==c||c.state!='on')return;
     const x=BTX;let dur=0;
-    if(x&&buf){try{const s=x.createBufferSource();s.buffer=buf;s.connect(x.destination);s.start();c.vs=s;dur=buf.duration}catch(_){}}
-    c.t2=setTimeout(()=>{if(CL!==c||c.state!='on')return;busyTone();endCall()},(dur+(V.gap==null?2:V.gap))*1000)})
+    if(x&&buf){try{const s=x.createBufferSource();s.buffer=buf;s.connect(x.destination);s.start(x.currentTime+.35);c.vs=s;dur=buf.duration}catch(_){}}
+    c.t2=setTimeout(()=>{if(CL!==c||c.state!='on')return;busyTone();endCall(1)},(dur+.35+(V.gap==null?2:V.gap))*1000)})
   },((n-1)*2.2+1.35)*1000);
   return false}
- if(ring){ringStart(c,D.ring);c.t0=setTimeout(()=>{if(CL!==c||c.state!='dial')return;ringStop(c);busyTone();endCall()},D.ring*1000);return false}
+ if(ring){ringStart(c,D.ring);c.t0=setTimeout(()=>{if(CL!==c||c.state!='dial')return;ringStop(c);busyTone();endCall(1)},D.ring*1000);return false}
  ringStart(c,2.2);
  c.t0=setTimeout(()=>{
   if(CL!==c||c.state!='dial')return;
-  c.state='on';c.st=Date.now();ringStop(c);paintCall();
+  c.state='on';c.st=Date.now();ringStop(c);sigTone(1);paintCall();
   c.ti=setInterval(()=>{const e=$('call').querySelector('.xct');if(e&&CL===c&&c.state=='on')e.textContent=cfmt()},1000);
   const nx=d=>{c.t1=setTimeout(()=>{
    if(CL!==c||c.state!='on')return;
@@ -959,11 +963,11 @@ function startCall(name,lines,from){
   nx(1500)},2200);
  return false;
 }
-function endCall(){
+function endCall(quiet){
  const c=CL;if(!c||c.state=='end')return;
  clearTimeout(c.t0);clearTimeout(c.t1);clearTimeout(c.t2);clearInterval(c.ti);ringStop(c);
  if(c.vs){try{c.vs.stop()}catch(_){}c.vs=null}
- c.state='end';paintCall();
+ c.state='end';if(!quiet)sigTone(0);paintCall();
  setTimeout(()=>{if(CL!==c)return;CL=null;$('call').classList.remove('on');setLT();draw(true)},2000);
 }
 A.cend=()=>{endCall();return false};
