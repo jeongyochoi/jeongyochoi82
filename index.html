@@ -1138,8 +1138,11 @@ A.back=()=>{back();return false};
 /* 톡 사진: 누르면 크게 보기, 저장 버튼으로 기기에 내려받기 */
 A.kpv=d=>{const c=document.querySelector('#talk .xc');S.tk.sy=c?c.scrollTop:null;S.tk.pv=+d.i};
 A.kpvx=()=>{S.tk.pv=null};
-A.kdl=d=>{try{const u=GIMG[d.k],b=atob(u.split(',')[1]),a8=new Uint8Array(b.length);for(let i=0;i<b.length;i++)a8[i]=b.charCodeAt(i);
- const url=URL.createObjectURL(new Blob([a8],{type:'image/jpeg'})),a=document.createElement('a');a.href=url;a.download=d.k+'.jpg';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),4000);toast('사진을 저장합니다')}catch(_){toast('사진을 저장할 수 없습니다')}return false};
+A.kdl=d=>{let blob;try{const u=GIMG[d.k],b=atob(u.split(',')[1]),a8=new Uint8Array(b.length);for(let i=0;i<b.length;i++)a8[i]=b.charCodeAt(i);blob=new Blob([a8],{type:'image/jpeg'})}catch(_){toast('사진을 저장할 수 없습니다');return false}
+ const fn=d.k+'.jpg',plain=()=>{try{const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=fn;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),4000);toast('사진을 저장합니다')}catch(_){toast('사진을 저장할 수 없습니다')}};
+ /* claude.ai 미리보기에서는 다운로드가 막혀 있어 '저장' 기능(downloads)을 쓰고, 그 밖의 일반 웹(GitHub Pages 등)에서는 브라우저 내려받기를 씁니다 */
+ const c=window.claude;if(c&&typeof c.use=='function'){c.use('downloads').then(s=>{if(!s){plain();return}return s.save({filename:fn,data:blob}).then(()=>toast('사진을 저장했습니다'),e=>{if(!e||e.code!='declined')toast('사진을 저장할 수 없습니다')})},()=>plain())}else plain();
+ return false};
 A.toast=d=>{toast(d.t);return false};
 ph.addEventListener('click',e=>{
  const el=e.target.closest('[data-a]');if(!el||!ph.contains(el))return;
