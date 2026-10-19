@@ -227,7 +227,14 @@ img.mms{display:block;height:auto;width:160px;cursor:pointer}
 .xkl{display:flex;align-items:flex-end;gap:5px;min-width:0}
 .xkb{background:#fff;border-radius:12px;padding:9px 12px;font-size:13.5px;line-height:1.45;max-width:252px;white-space:pre-wrap;word-break:keep-all;overflow-wrap:anywhere;min-width:0}
 .xkr.me .xkb{background:#fee500}
-.xkb.xkim{padding:0;background:none!important;max-width:none;line-height:0;overflow:hidden;border-radius:12px}
+.xkb.xkim{display:block;padding:0;background:none!important;max-width:none;line-height:0;overflow:hidden;border-radius:12px;text-align:left;cursor:pointer}
+.xa.tv{background:#000;color:#fff;padding-top:0}
+.xpv{flex:1;min-height:0;display:flex;flex-direction:column}
+.xpvt{flex:none;display:flex;align-items:center;gap:6px;padding:44px 8px 8px}
+.xpvt button{width:42px;height:42px;display:flex;align-items:center;justify-content:center;color:#fff;flex:none}
+.xpvi{flex:1;min-width:0;text-align:center;line-height:1.3}.xpvi b{display:block;font-size:15px;font-weight:600}.xpvi small{display:block;font-size:11px;opacity:.7}
+.xpvb{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:0 0 40px}
+.xpvb img{display:block;max-width:100%;max-height:100%;object-fit:contain}
 .xkim img{display:block;width:190px;max-width:100%;height:auto;border-radius:12px}
 .xkt{font-size:10px;color:#4b5a68;white-space:nowrap;flex:none}
 .xks{text-align:center;font-size:11px;color:#fff;background:#0003;border-radius:12px;padding:4px 12px;width:fit-content;margin:14px auto 8px}
@@ -568,19 +575,22 @@ img.mms{display:block;height:auto;width:160px;cursor:pointer}
 .xms .xpgb{position:absolute;left:14px;right:14px;bottom:8px;height:2px;border-radius:2px;background:#fff4}.xms .xpgb i{display:block;height:100%;background:#fff;border-radius:2px}
 .xtop{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .xtl{min-width:0}
-#mww{flex:none}
-#mww .xwm{width:104px;aspect-ratio:1;margin-top:6px;border-radius:24px;background:#fff;color:#22252b;padding:11px 12px 10px;text-align:left;display:flex;flex-direction:column;gap:4px;overflow:hidden}
-.xwm .h{font-size:12px;font-weight:700;color:#7a7f89;flex:none}
-.xwm .r{flex:1;min-height:0;display:flex;flex-direction:column;gap:3px;font-size:12.5px;line-height:1.3;min-width:0}
-.xwm .r span{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
-.xwm .r small{font-size:10px;color:#9aa0a9;flex:none;margin-top:auto}
+.xrw{display:flex;gap:12px;margin-top:12px;align-items:stretch}
+.xrw+.xms{margin-top:12px}
+.xwd{width:124px;flex:none;border-radius:24px;background:#ffffff2e;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:15px 12px;color:#fff;text-align:center}
+.xwd span{font-size:26px;line-height:1}.xwd b{font-size:19px;font-weight:700;line-height:1.1;letter-spacing:-.3px}.xwd small{font-size:12px;opacity:.92;white-space:nowrap}
+.xwm{flex:1;min-width:0;border-radius:24px;background:#fff;color:#22252b;padding:14px 16px;text-align:left;display:flex;flex-direction:column;gap:8px}
+.xwm .h{font-size:12px;font-weight:700;color:#7a7f89}
+.xwm .r{font-size:13px;line-height:1.35;min-width:0}
+.xwm .r span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.xms .art{border-radius:18px}.xms .art img{display:block;width:100%;height:100%;border-radius:inherit;object-fit:cover}
 #home .grid{margin-top:18px;gap:14px 6px}
 #home .dock{display:flex;justify-content:space-around;gap:0;padding:12px 8px;margin-top:auto;flex:none}
-#home .grid,#home .xms{flex:none}
+#home .grid,#home .xms,#home .xrw{flex:none}
 /* 밝은 바탕화면 위 글자 가독성 */
 #clk,#dt0,.xwx{color:#fff}
 #home .grid{text-shadow:none}
-@media(max-height:760px){.xtop{margin-bottom:8px}#mww .xwm{width:80px;padding:9px 10px}#mww .xwm .r span{-webkit-line-clamp:2;font-size:12px}#mww .xwm .r small{display:none}#clk{font-size:46px}#dt0{margin-bottom:10px}.xwx{display:none}#home .grid{margin-top:12px}}
+@media(max-height:760px){#clk{font-size:46px}#dt0{margin-bottom:10px}.xwx{display:none}#home .grid{margin-top:12px}}
 
 
 .xch .xtt{width:auto;height:auto;padding:5px 10px;font-size:21px;font-weight:700;border-radius:10px}
@@ -600,7 +610,7 @@ img.mms{display:block;height:auto;width:160px;cursor:pointer}
 <body>
 <div id="ph">
   <div id="sb"><span id="tm"></span><span class="sbr" role="img" aria-label="무음 모드, Wi-Fi, 배터리 82% 충전 중"><svg width="15.5" height="14" viewBox="0 0 20 18" aria-hidden="true"><defs><mask id="sbm1"><rect width="20" height="18" fill="#fff"/><path d="M1.6 2.4 11.2 15.6" stroke="#000" stroke-width="2.3" stroke-linecap="round"/></mask></defs><g mask="url(#sbm1)"><path d="M1.3 6.7h3.5L9.5 2.4v13.2l-4.7-4.3H1.3z" fill="currentColor" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></g><path d="M14.7 2.6q2.2 1.6 0 3.2t0 3.2t0 3.2t0 3.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><svg width="17.4" height="14" viewBox="0 0 22 18" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5.9 11.9A4.4 4.4 0 0 1 12.1 11.9"/><path d="M3.2 9.2A8.2 8.2 0 0 1 14.8 9.2"/><path d="M.5 6.5A12 12 0 0 1 17.5 6.5"/></g><circle cx="9" cy="15.3" r="1.35" fill="currentColor"/><g fill="none" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><g stroke="currentColor" opacity=".5"><path d="M14 11.6v5.2M12.4 15.2 14 16.8l1.6-1.6"/></g><g stroke="currentColor"><path d="M18.2 16.8v-5.2M16.6 13.2l1.6-1.6 1.6 1.6"/></g></g></svg><b>82%</b><svg width="9.4" height="15.6" viewBox="0 0 12 20" aria-hidden="true"><defs><clipPath id="sbc"><rect x="1" y="1.9" width="10" height="16.3" rx="2.2"/></clipPath><mask id="sbm2"><rect width="12" height="20" fill="#fff"/><path d="M6.9 4.4 3.5 10.5h2.1l-.7 5.1 3.6-6.4H6.3z" fill="#000" stroke="#000" stroke-width="1.7" stroke-linejoin="round"/></mask></defs><rect x="4" y="0" width="4" height="1.9" rx=".7" fill="currentColor" opacity=".55"/><g mask="url(#sbm2)"><rect x="1" y="1.9" width="10" height="16.3" rx="2.2" fill="currentColor" opacity=".42"/><rect x="1" y="4.83" width="10" height="13.37" fill="currentColor" clip-path="url(#sbc)"/></g><path d="M6.9 4.4 3.5 10.5h2.1l-.7 5.1 3.6-6.4H6.3z" fill="currentColor"/></svg></span></div>
-  <main id="home"><div class="xtop"><div class="xtl"><div id="clk"></div><div id="dt0"></div></div><div id="mww"></div></div><div id="hw"></div><div class="grid" id="gr"></div><div class="dock" id="dk"></div></main>
+  <main id="home"><div class="xtop"><div class="xtl"><div id="clk"></div><div id="dt0"></div></div></div><div id="hw"></div><div class="grid" id="gr"></div><div class="dock" id="dk"></div></main>
   <div id="ap"></div>
   <div class="app" id="call" role="dialog" aria-label="통화"></div>
   <div class="xtoast" id="tt" role="status"></div>
@@ -760,6 +770,7 @@ const IC={
  vol:I('<path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7"/>',26,2),
  star:I('<path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 16.9 6.8 19.7l1-5.9L3.5 9.7l5.9-.8z"/>',24,1.8),
  starF:I('<path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 16.9 6.8 19.7l1-5.9L3.5 9.7l5.9-.8z"/>',24,1.8,'#ffd43b').replace('stroke="currentColor"','stroke="#ffd43b"'),
+ dl:I('<path d="M12 4v11M7 11l5 5 5-5M5 20h14"/>',24,1.9),
  chat1:I('<path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.8 5.3 4.6 6.7L5.5 21.5l4.3-2.7c.7.1 1.5.2 2.2.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/>',28,1.8),
  newchat:I('<path d="M20 12.5V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h8l4 3v-3"/><path d="M12 8v6M9 11h6"/>',25,1.8),
  prev:'<svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>',
@@ -785,9 +796,8 @@ const missed=()=>S.ph.calls.reduce((a,c)=>a+(c[1]=='miss'&&!c[6]?(c[5]||1):0),0)
 /* 앱 아이콘 사진: AIMG[앱]이 있으면 타일(58px, 둥근 모서리)은 그대로 두고 사진으로 채움 */
 const ic=(id,l)=>{const a=APPS[id],im=window.AIMG&&AIMG[id],b=id=='talk'?unread():id=='phone'?missed():id=='sms'?1:0;return `<button onclick="openApp('${id}')" aria-label="${a[0]}"><div class="ic" style="background:${im?'none':a[1]};color:#222">${im?`<img src="${im}" alt="" draggable="false">`:typeof a[2]=='function'?a[2]():a[2]}${b?`<i class="bdg">${b}</i>`:''}</div>${l?a[0]:''}</button>`};
 function renderHome(){
- const m=S.mu,t=D.mu.songs[m.tr];
- $('hw').innerHTML=`<div class="xwx"><span style="font-size:22px">${D.wx.i}</span><b>${D.wx.t}</b><span>${esc(D.wx.p)}</span></div><div class="xms"><div class="art">♪</div><div class="t"><b>${esc(t[0])}</b><span>${esc(t[1])}</span></div><div class="ct"><button data-a="wprev" aria-label="이전 곡">${IC.prev}</button><button data-a="wplay" aria-label="${m.play?'일시정지':'재생'}">${m.play?IC.pause:IC.play}</button><button data-a="wnext" aria-label="다음 곡">${IC.next}</button></div><div class="xpgb"><i style="width:${m.prog}%"></i></div></div>`;
- $('mww').innerHTML=`<button class="xwm" onclick="openApp('memo')" aria-label="메모"><div class="h">메모</div>${S.me.memos.slice(0,1).map(x=>`<div class="r"><span>${esc(x.title||'제목 없음')}</span><small>${esc(x.d)}</small></div>`).join('')}</button>`;
+ const m=S.mu,t=D.mu.songs[m.tr],mi=window.AIMG&&AIMG.mus;
+ $('hw').innerHTML=`<div class="xwx"><span style="font-size:22px">${D.wx.i}</span><b>${D.wx.t}</b><span>${esc(D.wx.p)}</span></div><div class="xrw"><div class="xwd" role="img" aria-label="${esc(D.dd.t)} ${ddText()}"><span>${D.dd.e}</span><b>${ddText()}</b><small>${esc(D.dd.t)}</small></div><button class="xwm" onclick="openApp('memo')" aria-label="메모"><div class="h">메모</div>${S.me.memos.slice(0,2).map(x=>`<div class="r"><span>${esc(x.title||'제목 없음')}</span></div>`).join('')}</button></div><div class="xms"><div class="art"${mi?' style="background:none"':''}>${mi?`<img src="${mi}" alt="" draggable="false">`:'♪'}</div><div class="t"><b>${esc(t[0])}</b><span>${esc(t[1])}</span></div><div class="ct"><button data-a="wprev" aria-label="이전 곡">${IC.prev}</button><button data-a="wplay" aria-label="${m.play?'일시정지':'재생'}">${m.play?IC.pause:IC.play}</button><button data-a="wnext" aria-label="다음 곡">${IC.next}</button></div><div class="xpgb"><i style="width:${m.prog}%"></i></div></div>`;
  $('gr').innerHTML=GRID.map(id=>ic(id,1)).join('');
  $('dk').innerHTML=DOCK.map(id=>ic(id,0)).join('');
 }
@@ -811,7 +821,7 @@ const setLT=()=>{ph.classList.toggle('lt',!!(CL||(cur&&LT[cur]&&LT[cur]())));ph.
 function toast(t){const e=$('tt');e.textContent=t;e.style.display='block';clearTimeout(toast.id);toast.id=setTimeout(()=>e.style.display='none',1800)}
 function resetApp(id){
  if(id=='phone'){S.ph.tab='recent';S.ph.dial=''}
- else if(id=='talk'){S.tk.v='list';S.tk.pf=0}
+ else if(id=='talk'){S.tk.v='list';S.tk.pf=0;S.tk.pv=null;S.tk.sy=null}
  else if(id=='cal'){S.ca=CA0()}
  else if(id=='gal'){S.ga={p:null,y:0}}
  else if(id=='memo')S.me.i=null;
@@ -937,24 +947,26 @@ const KB={friend:'<svg width="24" height="24" viewBox="0 0 24 24" stroke="curren
 const KADD=I('<circle cx="10" cy="8" r="3.6"/><path d="M3 20c0-3.4 3-5.4 7-5.4s7 2 7 5.4"/><path d="M19 7.5v6M16 10.5h6"/>',24,1.7);
 const kbar=(on='chat')=>{const un=unread();return `<div class="xbar">${[['friend','친구'],['chat','채팅'],['view','뷰'],['shop','쇼핑'],['more','더보기']].map(([k,l])=>`<button class="${k==on?'on':''}" ${k=='friend'?'data-a="ktab" data-t="friends"':k=='chat'?'data-a="ktab" data-t="list"':`data-a="toast" data-t="${l}"`}><span class="xki">${KB[k]}${k=='chat'&&un?`<i class="xkd">${un>99?'99+':un}</i>`:''}</span>${l}</button>`).join('')}</div>`};
 const sbg=n=>C[[...String(n)].reduce((a,c)=>a+c.charCodeAt(0),0)%6];
-const kb=s=>{const m=/^@img:(\S+)$/.exec(s);if(m&&window.GIMG&&GIMG[m[1]])return `<div class="xkb xkim"><img src="${GIMG[m[1]]}" alt="사진" draggable="false"></div>`;return `<div class="xkb">${esc(s)}</div>`};
+const kb=(s,i)=>{const m=/^@img:(\S+)$/.exec(s);if(m&&window.GIMG&&GIMG[m[1]])return `<button class="xkb xkim" data-a="kpv" data-i="${i}" aria-label="사진 보기"><img src="${GIMG[m[1]]}" alt="사진" draggable="false"></button>`;return `<div class="xkb">${esc(s)}</div>`};
 const kmsgs=r=>{let pv=null;return r[3].map((m,i)=>{
  if(m.length<3){pv=null;return `<div class="xks">${esc(m[0])}</div>`}
  const me=m[0]==1,sn=m[3]||r[0],first=!pv||pv[0]!==m[0]||pv[1]!==sn||pv[2]!==m[2];pv=[m[0],sn,m[2]];
  const nx=r[3][i+1],tm=nx&&nx.length>2&&nx[0]===m[0]&&(nx[3]||r[0])===sn&&nx[2]===m[2]?'':`<span class="xkt">${m[2]}</span>`;
- if(me)return `<div class="xkr me${first?' f':''}">${tm}${kb(m[1])}</div>`;
- return `<div class="xkr${first?' f':''}">${first?`<button class="xkp" style="background:${sbg(sn)}" data-a="kprof" data-n="${esc(sn)}" aria-label="${esc(sn)} 프로필 보기">${esc(ini(sn))}</button>`:'<div class="xkp sp"></div>'}<div class="xkcol">${first?`<div class="xkn1">${esc(sn)}</div>`:''}<div class="xkl">${kb(m[1])}${tm}</div></div></div>`}).join('')};
+ if(me)return `<div class="xkr me${first?' f':''}">${tm}${kb(m[1],i)}</div>`;
+ return `<div class="xkr${first?' f':''}">${first?`<button class="xkp" style="background:${sbg(sn)}" data-a="kprof" data-n="${esc(sn)}" aria-label="${esc(sn)} 프로필 보기">${esc(ini(sn))}</button>`:'<div class="xkp sp"></div>'}<div class="xkcol">${first?`<div class="xkn1">${esc(sn)}</div>`:''}<div class="xkl">${kb(m[1],i)}${tm}</div></div></div>`}).join('')};
 V.talk=()=>{
  const k=S.tk,r=k.rooms[k.i];
+ if(k.pv!=null){const m=r[3][k.pv],key=/^@img:(\S+)$/.exec(m[1])[1];let dt='';for(let j=k.pv;j>=0;j--)if(r[3][j].length<3){dt=r[3][j][0];break}
+  return `<div class="xpv"><div class="xpvt"><button data-a="kpvx" aria-label="닫기">${IC.x}</button><div class="xpvi"><b>${esc(m[3]||r[0])}</b><small>${esc((dt+' '+m[2]).trim())}</small></div><button data-a="kdl" data-k="${esc(key)}" aria-label="사진 저장">${IC.dl}</button></div><div class="xpvb"><img src="${GIMG[key]}" alt="사진" draggable="false"></div></div>`}
  if(k.v=='profile'){const pn=k.pn||r[0],fr=k.pf,st=fr?((D.fr.find(x=>x[0]==pn)||[])[1]||''):(r[4]&&!r[5]?r[4]:'');return `<div class="xpt1"><button data-a="back" aria-label="닫기">${IC.x}</button><div style="display:flex">${pn=='강비오'?`<button data-a="toast" data-t="즐겨찾기" aria-label="즐겨찾기">${IC.starF}</button>`:tb(IC.star,'즐겨찾기')}${tb(IC.gear,'설정')}</div></div><div class="xpm1"><div class="xpph" style="background:${sbg(pn)}">${esc(ini(pn))}</div><div class="xpnm">${esc(pn)}</div>${st?`<div class="xpst">${esc(st)}</div>`:''}</div><div class="xpact">${!fr&&r[5]?'<button data-a="toast" data-t="1:1 채팅을 시작할 수 없습니다"><i>'+IC.chat1+'</i>1:1 채팅</button><button data-a="toast" data-t="보이스톡을 연결할 수 없습니다"><i>'+IC.phone+'</i>보이스톡</button>':`<button data-a="kpchat"><i>${IC.chat1}</i>1:1 채팅</button><button data-a="kpcall"><i>${IC.phone}</i>보이스톡</button>`}<button data-a="toast" data-t="페이스톡을 연결할 수 없습니다"><i>${IC.video}</i>페이스톡</button></div>`;}
  if(k.v=='room')return tbar(esc(r[0])+(r[5]?`<small class="xkcn">${r[5]}</small>`:''),tb(IC.search,'검색')+tb(IC.menu,'메뉴'))+`<div class="xc" style="padding:4px 14px 12px">${kmsgs(r)}</div><div class="xkin"><span class="xkf${r[6]?' dr':''}">${r[6]?esc(r[6]):'메시지 입력'}</span><span class="xksd${r[6]?' on':''}">전송</span></div>`;
  if(k.v=='friends'){const me=D.me[0],L=[...D.fr].sort((a,b)=>a[0].localeCompare(b[0],'ko'));return `<div class="xt"><button data-a="back" aria-label="뒤로">${IC.back}</button><strong style="font-size:22px">친구</strong><div class="xr">${tb(IC.search,'검색')}${tb(KADD,'친구 추가')}${tb(IC.gear,'설정')}</div></div><div class="xc" style="padding-top:2px"><div class="xkc1"><div class="xkav" style="background:#3e8bff">${esc(ini(me))}</div><div class="t"><strong>${esc(me)}</strong></div></div><div class="xfh">친구 ${L.length}</div>${L.map(f=>`<button class="xkc1" data-a="kprof" data-n="${esc(f[0])}" data-f="1"><div class="xkav" style="background:${sbg(f[0])}">${esc(ini(f[0]))}</div><div class="t"><strong>${esc(f[0])}</strong>${f[1]?`<p>${esc(f[1])}</p>`:''}</div></button>`).join('')}</div>${kbar('friend')}`}
  return `<div class="xt"><button data-a="back" aria-label="뒤로">${IC.back}</button><strong style="font-size:22px">채팅</strong><div class="xr">${tb(IC.search,'검색')}${tb(IC.newchat,'새 채팅')}${tb(IC.gear,'설정')}</div></div><div class="xc" style="padding-top:2px">${k.rooms.map((x,i)=>`<button class="xkc1" data-a="kroom" data-i="${i}"><div class="xkav" style="background:${x[5]?C[k.rooms.slice(0,i).filter(y=>y[5]).length%6]:sbg(x[0])}">${esc(ini(x[0]))}</div><div class="t"><strong>${esc(x[0])}${x[5]?`<small class="xkcn">${x[5]}</small>`:''}</strong><p>${esc(last(x[3]).replace(/\n+/g,' ').replace(/^@img:\S+$/,'사진'))}</p></div><div class="xmeta"><span>${x[1]}</span>${x[2]?`<span class="xbadge">${x[2]}</span>`:''}</div></button>`).join('')}</div>${kbar()}`;
 };
-CLS.talk=()=>({list:'tk',friends:'tk',room:'tr',profile:'tp'}[S.tk.v]);
-LT.talk=()=>S.tk.v=='profile';
-PH.talk=el=>{if(S.tk.v=='room'){const c=el.querySelector('.xc');c.scrollTop=c.scrollHeight}};
-BK.talk=()=>{const k=S.tk;if(k.v=='profile'){k.v=k.pf?'friends':'room';return true}if(k.v=='room'){k.v='list';return true}return false};
+CLS.talk=()=>S.tk.pv!=null?'tv':({list:'tk',friends:'tk',room:'tr',profile:'tp'}[S.tk.v]);
+LT.talk=()=>S.tk.v=='profile'||S.tk.pv!=null;
+PH.talk=el=>{if(S.tk.v=='room'&&S.tk.pv==null){const c=el.querySelector('.xc');c.scrollTop=S.tk.sy!=null?S.tk.sy:c.scrollHeight;S.tk.sy=null}};
+BK.talk=()=>{const k=S.tk;if(k.pv!=null){k.pv=null;return true}if(k.v=='profile'){k.v=k.pf?'friends':'room';return true}if(k.v=='room'){k.v='list';return true}return false};
 A.kroom=d=>{S.tk.i=+d.i;S.tk.rooms[S.tk.i][2]=0;S.tk.v='room'};
 A.kprof=d=>{S.tk.v='profile';S.tk.pn=d.n||'';S.tk.pf=d.f?1:0};
 A.ktab=d=>{S.tk.v=d.t=='friends'?'friends':'list';S.tk.pf=0};
@@ -1123,6 +1135,11 @@ BK.vid=()=>{const y=S.yt;if(y.v=='chan'){y.v=y.from;return true}if(y.v=='subs'){
 CLS.vid=()=>'xw';
 /* ===== 공통 이벤트 ===== */
 A.back=()=>{back();return false};
+/* 톡 사진: 누르면 크게 보기, 저장 버튼으로 기기에 내려받기 */
+A.kpv=d=>{const c=document.querySelector('#talk .xc');S.tk.sy=c?c.scrollTop:null;S.tk.pv=+d.i};
+A.kpvx=()=>{S.tk.pv=null};
+A.kdl=d=>{try{const u=GIMG[d.k],b=atob(u.split(',')[1]),a8=new Uint8Array(b.length);for(let i=0;i<b.length;i++)a8[i]=b.charCodeAt(i);
+ const url=URL.createObjectURL(new Blob([a8],{type:'image/jpeg'})),a=document.createElement('a');a.href=url;a.download=d.k+'.jpg';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),4000);toast('사진을 저장합니다')}catch(_){toast('사진을 저장할 수 없습니다')}return false};
 A.toast=d=>{toast(d.t);return false};
 ph.addEventListener('click',e=>{
  const el=e.target.closest('[data-a]');if(!el||!ph.contains(el))return;
@@ -1168,6 +1185,8 @@ function lkOpen(){
  setTimeout(()=>lkEl.classList.add('gone'),420);
  clearTimeout(LK.t);LK.t=setTimeout(ntShow,(D.lock.delay||0)*1000);
 }
+/* 번호키 터치음: 아주 짧고 가벼운 '톡' */
+function tapSnd(){try{tonePrep();const x=BTX;if(!x)return;const t=x.currentTime+.005,o=x.createOscillator(),g=x.createGain();o.type='sine';o.frequency.setValueAtTime(1500,t);o.frequency.exponentialRampToValueAtTime(900,t+.05);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.16,t+.003);g.gain.exponentialRampToValueAtTime(.0001,t+.06);o.connect(g);g.connect(x.destination);o.start(t);o.stop(t+.08)}catch(_){}}
 function lkKey(k){
  tonePrep();
  if(!LK.on||!lkEl.classList.contains('pin')||LK.busy)return;
@@ -1183,15 +1202,17 @@ function lkKey(k){
 $('lkh').textContent=D.lock.hint||'';
 {const cs=D.lock.cards||[];$('lkcard').innerHTML=cs.map(c=>{const im=c.img&&window.AIMG&&AIMG[c.img];return `<div class="lkn" role="note" aria-label="${esc(c.app)} 알림: ${esc((c.title?c.title+', ':'')+c.msg)}"><div class="lkch"><span class="lkci"${im?' style="background:none"':''}>${im?`<img src="${im}" alt="">`:esc(c.e||'')}</span><span>${esc(c.app)}</span>${c.time?`<span>· ${esc(c.time)}</span>`:''}</div>${c.title?`<div class="lkcm">${esc(c.title)}</div><div class="lkcs">${esc(c.msg)}</div>`:`<div class="lkcm">${esc(c.msg)}</div>`}</div>`}).join('')}
 $('lkpad').innerHTML=[...'123456789'].map(n=>`<button data-k="${n}" aria-label="${n}">${n}</button>`).join('')+'<button class="sm" data-k="cancel">취소</button><button data-k="0" aria-label="0">0</button>'+`<button data-k="del" aria-label="지우기">${IC.bksp}</button>`;
-$('lkpad').addEventListener('click',e=>{const b=e.target.closest('button[data-k]');if(!b)return;e.stopPropagation();b.dataset.k=='cancel'?lkShow(false):lkKey(b.dataset.k)});
+let lkTp=0;
+$('lkpad').addEventListener('pointerdown',e=>{if(e.target.closest('button[data-k]')&&BTX&&BTX.state=='running'){tapSnd();lkTp=1}});
+$('lkpad').addEventListener('click',e=>{const b=e.target.closest('button[data-k]');if(!b)return;e.stopPropagation();if(!lkTp)tapSnd();lkTp=0;b.dataset.k=='cancel'?lkShow(false):lkKey(b.dataset.k)});
 let lky=null;
 lkEl.addEventListener('pointerdown',e=>{lky=e.clientY});
 lkEl.addEventListener('pointerup',e=>{if(lky!=null&&lky-e.clientY>40&&!lkEl.classList.contains('pin'))lkShow(true);lky=null});
 lkEl.addEventListener('click',e=>{if(!lkEl.classList.contains('pin')&&!e.target.closest('.lkpin'))lkShow(true)});
 document.addEventListener('keydown',e=>{
  if(!LK.on)return;
- if(/^\d$/.test(e.key)){if(!lkEl.classList.contains('pin'))lkShow(true);lkKey(e.key)}
- else if(e.key=='Backspace')lkKey('del');
+ if(/^\d$/.test(e.key)){if(!lkEl.classList.contains('pin'))lkShow(true);tapSnd();lkKey(e.key)}
+ else if(e.key=='Backspace'){tapSnd();lkKey('del')}
  else if(e.key=='Enter'||e.key==' '||e.key=='ArrowUp'){if(!lkEl.classList.contains('pin'))lkShow(true)}
  else if(e.key=='Escape')lkShow(false);
 });
