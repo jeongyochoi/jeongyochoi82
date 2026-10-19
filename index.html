@@ -898,10 +898,18 @@ function callV(){
 const paintCall=()=>{if(CL)$('call').innerHTML=callV()};
 let BTX=null;
 const tonePrep=()=>{try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;if(!BTX)BTX=new AC();if(BTX.state=='suspended'){const p=BTX.resume();if(p&&p.catch)p.catch(()=>{})}}catch(_){}};
-/* 알림 도착음 '띵': 맑은 종소리(C6 기본음 + 배음)가 1초 남짓 울리다 사라짐 */
-function ding(){try{tonePrep();const x=BTX;if(!x)return;const t=x.currentTime+.02,out=x.createGain();out.gain.value=.55;out.connect(x.destination);
- [[587.3,.38,1.5],[1174.6,.08,.9],[1762,.02,.5]].forEach(([f,v,d])=>{const o=x.createOscillator(),g=x.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.014);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(out);o.start(t);o.stop(t+d+.05)});
- setTimeout(()=>{try{out.disconnect()}catch(_){}},1700)}catch(_){}}
+/* 팝(버블 터지는 소리): 빠르게 내려가는 사인파 + 아주 짧은 '틱' 잡음. f0→f1 Hz로 sw초 동안 내려가며 dec초에 걸쳐 사라짐 */
+function popAt(x,dst,t,f0,f1,sw,dec,v,clk){
+ const o=x.createOscillator(),g=x.createGain();o.type='sine';o.frequency.setValueAtTime(f0,t);o.frequency.exponentialRampToValueAtTime(f1,t+sw);
+ g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.003);g.gain.exponentialRampToValueAtTime(.0001,t+dec);
+ o.connect(g);g.connect(dst);o.start(t);o.stop(t+dec+.03);
+ if(clk){const n=Math.round(x.sampleRate*.014),b=x.createBuffer(1,n,x.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,2.5);
+  const s=x.createBufferSource(),f=x.createBiquadFilter(),c=x.createGain();s.buffer=b;f.type='bandpass';f.frequency.value=1200;f.Q.value=.7;c.gain.value=clk;s.connect(f);f.connect(c);c.connect(dst);s.start(t)}
+}
+/* 알림 도착음: 조금 크고 둥근 팝 (560→210Hz, 0.3초 안팎) */
+function ding(){try{tonePrep();const x=BTX;if(!x)return;const t=x.currentTime+.02,out=x.createGain();out.gain.value=.6;out.connect(x.destination);
+ popAt(x,out,t,560,210,.09,.5,.42,.05);
+ setTimeout(()=>{try{out.disconnect()}catch(_){}},900)}catch(_){}}
 /* 뚜루루 뚜루루: 1초 울리고 1.2초 쉬는 발신음 (440+480Hz를 20Hz로 떨어 '르르르' 느낌) */
 function ringTones(x,dst,t,secs){
  const L=[];
@@ -926,6 +934,18 @@ function busyTone(){try{tonePrep();const x=BTX;if(!x)return;const t=x.currentTim
 function sigTone(up){try{tonePrep();const x=BTX;if(!x)return;const t=x.currentTime+.02,out=x.createGain();out.gain.value=.6;out.connect(x.destination);
  (up?[[880,0,.14,0,'triangle',.34,.008],[1318.5,.12,.32,0,'triangle',.34,.008]]:[[587.3,0,.22,.05,'sine',.4,.02],[392,.14,.42,.09,'sine',.4,.02]]).forEach(([f,d,l,h,ty,pk,at])=>{const o=x.createOscillator(),g=x.createGain(),s=t+d;o.type=ty;o.frequency.value=f;g.gain.setValueAtTime(0,s);g.gain.linearRampToValueAtTime(pk,s+at);if(h)g.gain.setValueAtTime(pk,s+at+h);g.gain.exponentialRampToValueAtTime(.0001,s+l);o.connect(g);g.connect(out);o.start(s);o.stop(s+l+.03)});
  setTimeout(()=>{try{out.disconnect()}catch(_){}},1000)}catch(_){}}
+/* 강비오 통화 음성 순서: 1·2·3을 무작위로 섞어 한 바퀴씩 돌립니다 (한 바퀴 안에서는 겹치지 않고, 바퀴가 바뀔 때 같은 파일이 연달아 나오지 않음).
+   통화가 연결될 때 다음 순서로 넘어가므로, 연결되기 전에 끊으면 순서가 줄어들지 않고, 새로 고쳐도 이어집니다 */
+const VBAG={q:[],last:-1};
+(()=>{try{const s=JSON.parse(localStorage.getItem('jyVoiceBag')||'null');if(s&&Array.isArray(s.q)){VBAG.q=s.q.filter(i=>Number.isInteger(i)&&i>=0);VBAG.last=Number.isInteger(s.last)?s.last:-1}}catch(_){}})();
+function voicePeek(){
+ const n=window.VAUD?VAUD.length:0;if(!n)return 0;
+ VBAG.q=VBAG.q.filter(i=>i<n);
+ if(!VBAG.q.length){const a=[...Array(n).keys()];for(let i=n-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}
+  if(n>1&&a[0]==VBAG.last){const j=1+Math.floor(Math.random()*(n-1));[a[0],a[j]]=[a[j],a[0]]}
+  VBAG.q=a}
+ return VBAG.q[0]}
+function voiceCommit(){const k=VBAG.q.shift();if(k!=null)VBAG.last=k;try{localStorage.setItem('jyVoiceBag',JSON.stringify(VBAG))}catch(_){}}
 /* 강비오 통화 음성: mp3를 미리 해독해 두었다가 연결되면 재생 */
 const VB=[];
 function voiceBuf(k){if(VB[k]!==undefined)return VB[k];tonePrep();return VB[k]=new Promise(res=>{try{const u=VAUD[k],b=atob(u.split(',')[1]),a8=new Uint8Array(b.length);for(let i=0;i<b.length;i++)a8[i]=b.charCodeAt(i);const x=BTX;if(!x){VB[k]=undefined;res(null);return}const ok=r=>res(r),no=()=>{VB[k]=undefined;res(null)};const p=x.decodeAudioData(a8.buffer,ok,no);if(p&&p.catch)p.catch(no)}catch(_){VB[k]=undefined;res(null)}})}
@@ -937,11 +957,11 @@ function startCall(name,lines,from){
  const c=CL={name,lines:lines||[],shown:0,state:'dial',from};
  $('call').classList.add('on');paintCall();setLT();
  if(vo){
-  const V=D.voice,n=Math.max(1,V.ring||2),k=Math.floor(Math.random()*VAUD.length),pb=voiceBuf(k);c.vk=k;
+  const V=D.voice,n=Math.max(1,V.ring||2),k=voicePeek(),pb=voiceBuf(k);c.vk=k;
   ringStart(c,(n-1)*2.2+1);
   c.t0=setTimeout(()=>{
    if(CL!==c||c.state!='dial')return;
-   c.state='on';c.st=Date.now();ringStop(c);sigTone(1);paintCall();
+   c.state='on';c.st=Date.now();ringStop(c);sigTone(1);voiceCommit();paintCall();
    c.ti=setInterval(()=>{const e=$('call').querySelector('.xct');if(e&&CL===c&&c.state=='on')e.textContent=cfmt()},1000);
    pb.then(buf=>{
     if(CL!==c||c.state!='on')return;
@@ -1244,8 +1264,8 @@ function lkOpen(){
  setTimeout(()=>lkEl.classList.add('gone'),420);
  clearTimeout(LK.t);LK.t=setTimeout(ntShow,(D.lock.delay||0)*1000);
 }
-/* 번호키 터치음: 아주 짧고 가벼운 '톡' */
-function tapSnd(){try{tonePrep();const x=BTX;if(!x)return;const t=x.currentTime+.005,o=x.createOscillator(),g=x.createGain();o.type='sine';o.frequency.setValueAtTime(560,t);o.frequency.exponentialRampToValueAtTime(300,t+.055);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.17,t+.005);g.gain.exponentialRampToValueAtTime(.0001,t+.075);o.connect(g);g.connect(x.destination);o.start(t);o.stop(t+.08)}catch(_){}}
+/* 번호키 터치음: 작고 가벼운 팝 (620→250Hz, 0.1초 안팎) */
+function tapSnd(){try{tonePrep();const x=BTX;if(!x)return;popAt(x,x.destination,x.currentTime+.005,620,250,.04,.1,.22,.035)}catch(_){}}
 function lkKey(k){
  tonePrep();
  if(!LK.on||!lkEl.classList.contains('pin')||LK.busy)return;
