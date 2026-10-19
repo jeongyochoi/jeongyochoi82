@@ -564,29 +564,21 @@ img.mms{display:block;height:auto;width:160px;cursor:pointer}
 .xms .t{flex:1;min-width:0}.xms .t b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.xms .t span{display:block;font-size:12px;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .xms .ct{display:flex;align-items:center}.xms .ct button{width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:#fff}
 .xms .xpgb{position:absolute;left:14px;right:14px;bottom:8px;height:2px;border-radius:2px;background:#fff4}.xms .xpgb i{display:block;height:100%;background:#fff;border-radius:2px}
-.xrw{display:flex;gap:12px;margin-top:12px;min-height:100px}
 .xtop{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .xtl{min-width:0}
-.xwc{flex:none;width:140px;position:relative;border-radius:24px;background:#e8e8ecec;color:#1c1c21;text-align:center;overflow:hidden}
-.xwc .wci{position:absolute;inset:8px 7px 7px;display:flex;flex-direction:column}
-.xwc .wch{flex:none;text-align:center;font-size:13px;font-weight:800;line-height:1.1;margin-bottom:3px;letter-spacing:-.2px}
-.xwc .wcw,.xwc .wcg{display:grid;grid-template-columns:repeat(7,1fr)}
-.xwc .wcw{flex:none}.xwc .wcg{flex:1;min-height:0;grid-auto-rows:minmax(0,1fr)}
-.xwc i{font-style:normal;font-size:9.5px;line-height:1;display:grid;place-items:center;min-height:0}
-.xwc .wcw i{font-size:8.5px;font-weight:700;height:11px}
-.xwc .s{color:#e5453a}.xwc .t{color:#3a7bdc}
-.xwc .wcg i.on{background:#000;color:#fff;font-weight:700;border-radius:5px;justify-self:center;align-self:center;height:min(100%,13px);aspect-ratio:1}
-.xwm{flex:1;min-width:0;border-radius:24px;background:#fff;color:#22252b;padding:11px 14px;text-align:left;display:flex;flex-direction:column;gap:5px}
-.xwm .h{font-size:12px;font-weight:700;color:#7a7f89}
-.xwm .r{display:flex;flex-direction:column;gap:1px;font-size:12.5px;line-height:1.3;min-width:0}
-.xwm .r span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.xwm .r small{font-size:10px;color:#9aa0a9;flex:none}
+#mww{flex:none}
+#mww .xwm{width:104px;aspect-ratio:1;margin-top:6px;border-radius:24px;background:#fff;color:#22252b;padding:11px 12px 10px;text-align:left;display:flex;flex-direction:column;gap:4px;overflow:hidden}
+.xwm .h{font-size:12px;font-weight:700;color:#7a7f89;flex:none}
+.xwm .r{flex:1;min-height:0;display:flex;flex-direction:column;gap:3px;font-size:12.5px;line-height:1.3;min-width:0}
+.xwm .r span{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.xwm .r small{font-size:10px;color:#9aa0a9;flex:none;margin-top:auto}
 #home .grid{margin-top:18px;gap:14px 6px}
 #home .dock{display:flex;justify-content:space-around;gap:0;padding:12px 8px;margin-top:auto;flex:none}
-#home .grid,#home .xms,#home .xrw{flex:none}
+#home .grid,#home .xms{flex:none}
 /* 밝은 바탕화면 위 글자 가독성 */
 #clk,#dt0,.xwx{color:#fff}
 #home .grid{text-shadow:none}
-@media(max-height:760px){#clk{font-size:46px}#dt0{margin-bottom:10px}.xwx{display:none}#home .grid{margin-top:12px}}
+@media(max-height:760px){.xtop{margin-bottom:8px}#mww .xwm{width:80px;padding:9px 10px}#mww .xwm .r span{-webkit-line-clamp:2;font-size:12px}#mww .xwm .r small{display:none}#clk{font-size:46px}#dt0{margin-bottom:10px}.xwx{display:none}#home .grid{margin-top:12px}}
 
 
 .xch .xtt{width:auto;height:auto;padding:5px 10px;font-size:21px;font-weight:700;border-radius:10px}
@@ -606,7 +598,7 @@ img.mms{display:block;height:auto;width:160px;cursor:pointer}
 <body>
 <div id="ph">
   <div id="sb"><span id="tm"></span><span class="sbr" role="img" aria-label="무음 모드, Wi-Fi, 배터리 82% 충전 중"><svg width="15.5" height="14" viewBox="0 0 20 18" aria-hidden="true"><defs><mask id="sbm1"><rect width="20" height="18" fill="#fff"/><path d="M1.6 2.4 11.2 15.6" stroke="#000" stroke-width="2.3" stroke-linecap="round"/></mask></defs><g mask="url(#sbm1)"><path d="M1.3 6.7h3.5L9.5 2.4v13.2l-4.7-4.3H1.3z" fill="currentColor" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></g><path d="M14.7 2.6q2.2 1.6 0 3.2t0 3.2t0 3.2t0 3.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><svg width="17.4" height="14" viewBox="0 0 22 18" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5.9 11.9A4.4 4.4 0 0 1 12.1 11.9"/><path d="M3.2 9.2A8.2 8.2 0 0 1 14.8 9.2"/><path d="M.5 6.5A12 12 0 0 1 17.5 6.5"/></g><circle cx="9" cy="15.3" r="1.35" fill="currentColor"/><g fill="none" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><g stroke="currentColor" opacity=".5"><path d="M14 11.6v5.2M12.4 15.2 14 16.8l1.6-1.6"/></g><g stroke="currentColor"><path d="M18.2 16.8v-5.2M16.6 13.2l1.6-1.6 1.6 1.6"/></g></g></svg><b>82%</b><svg width="9.4" height="15.6" viewBox="0 0 12 20" aria-hidden="true"><defs><clipPath id="sbc"><rect x="1" y="1.9" width="10" height="16.3" rx="2.2"/></clipPath><mask id="sbm2"><rect width="12" height="20" fill="#fff"/><path d="M6.9 4.4 3.5 10.5h2.1l-.7 5.1 3.6-6.4H6.3z" fill="#000" stroke="#000" stroke-width="1.7" stroke-linejoin="round"/></mask></defs><rect x="4" y="0" width="4" height="1.9" rx=".7" fill="currentColor" opacity=".55"/><g mask="url(#sbm2)"><rect x="1" y="1.9" width="10" height="16.3" rx="2.2" fill="currentColor" opacity=".42"/><rect x="1" y="4.83" width="10" height="13.37" fill="currentColor" clip-path="url(#sbc)"/></g><path d="M6.9 4.4 3.5 10.5h2.1l-.7 5.1 3.6-6.4H6.3z" fill="currentColor"/></svg></span></div>
-  <main id="home"><div class="xtop"><div class="xtl"><div id="clk"></div><div id="dt0"></div></div></div><div id="hw"></div><div class="grid" id="gr"></div><div class="dock" id="dk"></div></main>
+  <main id="home"><div class="xtop"><div class="xtl"><div id="clk"></div><div id="dt0"></div></div><div id="mww"></div></div><div id="hw"></div><div class="grid" id="gr"></div><div class="dock" id="dk"></div></main>
   <div id="ap"></div>
   <div class="app" id="call" role="dialog" aria-label="통화"></div>
   <div class="xtoast" id="tt" role="status"></div>
@@ -789,15 +781,10 @@ const GRID=['cal','web','mus','gal','memo','rec'],DOCK=['phone','sms','clock','v
 const missed=()=>S.ph.calls.reduce((a,c)=>a+(c[1]=='miss'&&!c[6]?(c[5]||1):0),0);
 /* 앱 아이콘 사진: AIMG[앱]이 있으면 타일(58px, 둥근 모서리)은 그대로 두고 사진으로 채움 */
 const ic=(id,l)=>{const a=APPS[id],im=window.AIMG&&AIMG[id],b=id=='talk'?unread():id=='phone'?missed():id=='sms'?1:0;return `<button onclick="openApp('${id}')" aria-label="${a[0]}"><div class="ic" style="background:${im?'none':a[1]};color:#222">${im?`<img src="${im}" alt="" draggable="false">`:typeof a[2]=='function'?a[2]():a[2]}${b?`<i class="bdg">${b}</i>`:''}</div>${l?a[0]:''}</button>`};
-/* 홈 달력 위젯: 휴대폰의 현재 날짜(D.now)가 있는 달, 오늘은 검은 네모 */
-function calW(){
- const [y,mo,d]=D.now,first=new Date(y,mo-1,1).getDay(),dim=new Date(y,mo,0).getDate();
- const cells=Array.from({length:first},()=>'<i></i>').concat(Array.from({length:dim},(_,j)=>{const n=j+1,w=(first+j)%7;return `<i class="${[w==0?'s':w==6?'t':'',n==d?'on':''].join(' ').trim()}">${n}</i>`}));
- return `<button class="xwc" onclick="openApp('cal')" aria-label="달력 ${y}년 ${mo}월 ${d}일"><div class="wci"><div class="wch">${mo}월</div><div class="wcw">${[...'일월화수목금토'].map((c,i)=>`<i class="${i==0?'s':i==6?'t':''}">${c}</i>`).join('')}</div><div class="wcg">${cells.join('')}</div></div></button>`;
-}
 function renderHome(){
  const m=S.mu,t=D.mu.songs[m.tr];
- $('hw').innerHTML=`<div class="xwx"><span style="font-size:22px">${D.wx.i}</span><b>${D.wx.t}</b><span>${esc(D.wx.p)}</span></div><div class="xms"><div class="art">♪</div><div class="t"><b>${esc(t[0])}</b><span>${esc(t[1])}</span></div><div class="ct"><button data-a="wprev" aria-label="이전 곡">${IC.prev}</button><button data-a="wplay" aria-label="${m.play?'일시정지':'재생'}">${m.play?IC.pause:IC.play}</button><button data-a="wnext" aria-label="다음 곡">${IC.next}</button></div><div class="xpgb"><i style="width:${m.prog}%"></i></div></div><div class="xrw">${calW()}<button class="xwm" onclick="openApp('memo')" aria-label="메모"><div class="h">메모</div>${S.me.memos.slice(0,2).map(x=>`<div class="r"><span>${esc(x.title||'제목 없음')}</span><small>${esc(x.d)}</small></div>`).join('')}</button></div>`;
+ $('hw').innerHTML=`<div class="xwx"><span style="font-size:22px">${D.wx.i}</span><b>${D.wx.t}</b><span>${esc(D.wx.p)}</span></div><div class="xms"><div class="art">♪</div><div class="t"><b>${esc(t[0])}</b><span>${esc(t[1])}</span></div><div class="ct"><button data-a="wprev" aria-label="이전 곡">${IC.prev}</button><button data-a="wplay" aria-label="${m.play?'일시정지':'재생'}">${m.play?IC.pause:IC.play}</button><button data-a="wnext" aria-label="다음 곡">${IC.next}</button></div><div class="xpgb"><i style="width:${m.prog}%"></i></div></div>`;
+ $('mww').innerHTML=`<button class="xwm" onclick="openApp('memo')" aria-label="메모"><div class="h">메모</div>${S.me.memos.slice(0,1).map(x=>`<div class="r"><span>${esc(x.title||'제목 없음')}</span><small>${esc(x.d)}</small></div>`).join('')}</button>`;
  $('gr').innerHTML=GRID.map(id=>ic(id,1)).join('');
  $('dk').innerHTML=DOCK.map(id=>ic(id,0)).join('');
 }
