@@ -1349,6 +1349,25 @@ function lkRelock(){
 }
 let nvN=0,nvT=0;
 $('nv').addEventListener('click',()=>{const n=Date.now();nvN=n-nvT<700?nvN+1:1;nvT=n;if(nvN>=10){nvN=0;lkRelock()}});
+/* 자동 번역 보정: 번역기가 '비오'를 Bio/BIO 로 옮기면 Pio/PIO 로 고친다 */
+(()=>{
+const R1=/\bBI-?OH?(?=(?:YA)?(?![A-Za-z]))/g,R2=/\bBi-?[oO]h?(?=(?:ya)?(?![A-Za-z]))/g,HIT=/B[iI]-?[oO]/,AT=['placeholder','title','aria-label','alt'];
+const fx=v=>v.replace(R1,'PIO').replace(R2,'Pio');
+const fxA=e=>{for(const a of AT){const v=e.getAttribute&&e.getAttribute(a);if(v&&HIT.test(v)){const w=fx(v);if(w!==v)e.setAttribute(a,w)}}};
+const fxT=t=>{const v=t.data;if(v&&HIT.test(v)){const w=fx(v);if(w!==v)t.data=w}};
+const fxN=n=>{
+ if(n.nodeType===3){fxT(n);return}
+ if(n.nodeType!==1||n.tagName==='SCRIPT'||n.tagName==='STYLE')return;
+ fxA(n);n.querySelectorAll('[placeholder],[title],[aria-label],[alt]').forEach(fxA);
+ const w=document.createTreeWalker(n,NodeFilter.SHOW_TEXT);let t;while(t=w.nextNode())fxT(t);
+};
+new MutationObserver(ms=>{for(const m of ms){
+ if(m.type==='characterData')fxT(m.target);
+ else if(m.type==='attributes')fxA(m.target);
+ else m.addedNodes.forEach(fxN);
+}}).observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:AT});
+fxN(ph);
+})();
 lkLock(true);
 renderHome();tick();setInterval(tick,3e4);
 /* 홈 음악 위젯 진행 바 (소리는 나지 않는 장식) */
